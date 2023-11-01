@@ -42,12 +42,13 @@ class Generic_Robot:
     self.rm.brake()
 
   ### DRIVE GYRO MILIMETERS ###
-  def gyro_drive(self, angle, speed, distance_mm, gainP=5, gainI=0.0001, gainD=1.2, reset_sensor=True):
+  def gyro_drive(self, angle, speed, distance_mm, gainP=5, gainI=0, gainD=1.2, reset_sensor=True):
     if reset_sensor == True:
       self.gyro.reset_angle(0)
     pid_controller = PIDController(gainP, gainI, gainD)
     while self.robot.distance() < distance_mm:
       self.robot.drive(speed, pid_controller.adjust(angle - self.gyro.angle()))
+      print(self.gyro.angle(), self.robot.state())
     self.robot.stop()
     self.lm.brake()
     self.rm.brake()
@@ -122,7 +123,7 @@ class Robot_Plus(Generic_Robot):
     self.right_motor = Motor(Port.C, Direction.CLOCKWISE, gears=None)
     self.act_right = Motor(Port.A, Direction.CLOCKWISE, gears=None)
     self.act_left = Motor(Port.D, Direction.CLOCKWISE, gears=None)
-    self.drive_base = DriveBase(self.left_motor, self.right_motor, 57, 125)
+    self.drive_base = DriveBase(self.left_motor, self.right_motor, 57, 120)
     #self.infared = InfraredSensor(Port.S1)
     self.left_color = ColorSensor(Port.S1)
     self.right_color = ColorSensor(Port.S2)
