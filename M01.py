@@ -12,7 +12,13 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 def mo1(robot):
-  robot.drive_mm(0, 500, 250)
-  robot.pivot(90, 500)
-  robot.drive_mm(0, 500, 100)
-  robot.act_right.turn_angle(300, 180)
+  robot.gyro_drive(0, 150, 455)
+  robot.act_right.run_time(-1000, 600, wait=False)
+  wait(350)
+  robot.pivot(-10, 100)
+  robot.drive_mm(0, 150, -100)
+  robot.pivot(-55, 150)
+  robot.act_right.run_angle(120, 120)
+  robot.pivot(45, 100)
+  robot.drive_mm(0, 200, -300)
+  robot.act_right.run_time(1000, 500)

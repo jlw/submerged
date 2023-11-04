@@ -48,7 +48,7 @@ class Generic_Robot:
     pid_controller = PIDController(gainP, gainI, gainD)
     while self.robot.distance() < distance_mm:
       self.robot.drive(speed, pid_controller.adjust(angle - self.gyro.angle()))
-      print(self.gyro.angle(), self.robot.state())
+      #print(self.gyro.angle(), self.robot.state())
     self.robot.stop()
     self.lm.brake()
     self.rm.brake()
@@ -125,9 +125,9 @@ class Robot_Plus(Generic_Robot):
     self.act_left = Motor(Port.D, Direction.CLOCKWISE, gears=None)
     self.drive_base = DriveBase(self.left_motor, self.right_motor, 57, 120)
     #self.infared = InfraredSensor(Port.S1)
-    self.left_color = ColorSensor(Port.S1)
-    self.right_color = ColorSensor(Port.S2)
-    self.gyro_sensor = GyroSensor(Port.S3)
+    self.left_color = ColorSensor(Port.S3)
+    self.right_color = ColorSensor(Port.S4)
+    self.gyro_sensor = GyroSensor(Port.S2)
     Generic_Robot.__init__(self, self.ev3, self.drive_base, self.left_motor, self.right_motor, self.left_color, self.right_color, self.gyro_sensor)
   
   def query(self):
