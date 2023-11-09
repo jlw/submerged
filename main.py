@@ -10,7 +10,7 @@ from pybricks.nxtdevices import LightSensor
 
 from robot import Generic_Robot
 from robot import Robot_Plus
-from M01 import mo1()
+from M01 import mo1
 
 robot = Robot_Plus()
 
