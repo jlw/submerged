@@ -15,4 +15,4 @@ from M08 import mo8
 
 robot = Robot_Plus()
 
-mo1(robot)
+mo8(robot)

@@ -12,5 +12,5 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 def mo8(robot):
-  robot.gyro_drive(0, 150, 280)
-  robot.drive_mm(0, 200, -310)
+  robot.gyro_drive(0, 150, 355)
+  robot.drive_mm(0, 175, -380)
