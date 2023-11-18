@@ -38,8 +38,8 @@ class Generic_Robot:
     self.robot.settings(speed, rate, speed, rate)
     self.robot.turn(angle)
     self.robot.stop()
-    self.lm.brake()
-    self.rm.brake()
+    self.lm.hold()
+    self.rm.hold()
 
   ### DRIVE GYRO MILIMETERS ###
   def gyro_drive(self, angle, speed, distance_mm, gainP=6, gainI=0.15, gainD=1.5, reset_sensor=True):
@@ -124,7 +124,7 @@ class Robot_Plus(Generic_Robot):
     self.right_motor = Motor(Port.C, Direction.CLOCKWISE, gears=None)
     self.act_right = Motor(Port.A, Direction.CLOCKWISE, gears=None)
     self.act_left = Motor(Port.D, Direction.CLOCKWISE, gears=None)
-    self.drive_base = DriveBase(self.left_motor, self.right_motor, 57, 125)
+    self.drive_base = DriveBase(self.left_motor, self.right_motor, 57, 130)
     #self.infared = InfraredSensor(Port.S1)
     self.left_color = ColorSensor(Port.S3)
     self.right_color = ColorSensor(Port.S4)
