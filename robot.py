@@ -43,6 +43,7 @@ class Generic_Robot:
 
   ### DRIVE GYRO MILIMETERS ###
   def gyro_drive(self, angle, speed, distance_mm, gainP=6, gainI=0.15, gainD=1.5, reset_sensor=True):
+    self.robot.reset()
     if reset_sensor == True:
       self.gyro.reset_angle(0)
     pid_controller = PIDController(gainP, gainI, gainD)
