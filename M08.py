@@ -12,13 +12,12 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 def mo8(robot):
-  #robot.pivot(-90, 100)
-  robot.gyro_drive(0, 150, 200, reset_sensor=False)
-  robot.pivot(45, 100)
-  robot.gyro_drive(0, 200, 350)
-  robot.high_tork_time(400, 4000)
-
-  #robot.gyro_drive(0, 250, 330)
-  #robot.left_motor.run_time(100, 1000, wait=False)
-  #robot.right_motor.run_time(100, 1000)
-  #robot.drive_mm(0, 175, -380)
+  robot.pivot(-90, 75)
+  robot.drive_mm(0, 150, 145)
+  robot.pivot(45, 75)
+  robot.drive_mm(0, 200, 350)
+  robot.high_tork_time(400, 4500)
+  robot.drive_mm(0, 150, -310)
+  robot.left_motor.run_angle(75, -215)
+  robot.drive_mm(0, 250, 180)
+  robot.drive_mm(0, 175, -380)
