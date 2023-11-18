@@ -138,6 +138,6 @@ class Robot_Plus(Generic_Robot):
     self.act_right.run_angle(speed, angle, wait=False)
     self.act_left.run_angle(speed, angle)
   
-  def high_tork_time(self, time, speed):
+  def high_tork_time(self, speed, time):
     self.act_right.run_time(speed, time, wait=False)
     self.act_left.run_time(speed, time)
