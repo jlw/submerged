@@ -11,7 +11,7 @@ from robot import Robot_Plus
 
 robot = Robot_Plus()
 
-def mo1(robot):
+def mo9(robot):
   robot.gyro_drive(0, 150, 455)
   robot.act_right.run_time(-1000, 600, wait=False)
   wait(350)
