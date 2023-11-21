@@ -14,9 +14,9 @@ from scrim_master import start
 
 from M09 import mo9
 from M08 import mo8
-from M04 import mo4a, mo4b
+from M06 import mo6
 
 robot = Robot_Plus()
 
 
-mo9(robot)
+mo6(robot)
