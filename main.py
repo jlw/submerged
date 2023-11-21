@@ -18,5 +18,4 @@ from M06 import mo6
 
 robot = Robot_Plus()
 
-
 mo6(robot)
