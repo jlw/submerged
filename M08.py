@@ -19,5 +19,5 @@ def mo8(robot):
   robot.high_tork_time(400, 4500)
   robot.drive_mm(0, 150, -310)
   robot.left_motor.run_angle(75, -215)
-  robot.drive_mm(0, 200, 180)
+  robot.drive_mm(0, 200, 210)
   robot.drive_mm(0, 250, -380)
