@@ -12,9 +12,9 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 def mo8(robot):
-  robot.pivot(-90, 75)
+  robot.pivot(-90, 100)
   robot.gyro_drive(-90, 150, 145, reset_sensor=False)
-  robot.pivot(45, 75)
+  robot.pivot(45, 100)
   robot.drive_mm(0, 200, 350)
   robot.high_tork_time(400, 4500)
   robot.drive_mm(0, 150, -310)
