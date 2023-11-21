@@ -15,7 +15,14 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 
-robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
+# working: robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
+
+
+
+
+
+
+
 #test 1 gyro drive: P=0, I=0, D=0. deviated: 25mm
 #test 2 gyro drive: P=1, I=0, D=0. deviated: 100mm
 #test 3 gyro drive: P=3, I=0, D=0. deviated: 15mm
