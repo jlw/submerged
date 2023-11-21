@@ -7,7 +7,7 @@ from pybricks.robotics import DriveBase
 from pybricks.nxtdevices import LightSensor
 
 from pid import PIDController
-
+import math
 
 class Generic_Robot:
   def __init__(self, EV3Brick, DriveBase, LeftMotor, RightMotor, LightSensorLeft, LightSensorRight, GyroSensor):
@@ -34,7 +34,7 @@ class Generic_Robot:
     self.rm.brake()
   
   ### PIVOT ANGLE ###
-  def pivot(self, angle, speed, rate=500):
+  def pivot_old(self, angle, speed, rate=500):
     self.robot.settings(speed, rate, speed, rate)
     self.robot.turn(angle)
     self.robot.stop()
@@ -141,3 +141,22 @@ class Robot_Plus(Generic_Robot):
   def high_tork_time(self, speed, time):
     self.act_right.run_time(speed, time, wait=False)
     self.act_left.run_time(speed, time)
+
+  def drive_tank(self, motor_degrees, left_speed, right_speed):
+    self.left_motor.run_angle(left_speed, motor_degrees, then=Stop.BRAKE, wait=False)
+    self.right_motor.run_angle(right_speed, motor_degrees, then=Stop.BRAKE)
+
+  def pivot(self, target_angle, speed):
+    left_speed = speed
+    right_speed = 0 - speed
+    if 0 > target_angle:
+      left_speed = 0 - speed
+      right_speed = speed
+      target_angle = 0 - target_angle
+
+    wheel_circumference_mm = math.pi * 57.0
+    wheelbase_circumference_mm = math.pi * 125.0
+    target_distance = (wheelbase_circumference_mm / 360.0) * target_angle
+    motor_degrees = (360 / wheel_circumference_mm) * target_distance
+
+    self.drive_tank(motor_degrees, left_speed, right_speed)
