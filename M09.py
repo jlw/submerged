@@ -18,7 +18,7 @@ def mo9(robot):
   robot.pivot(-10, 100)
   robot.drive_mm(0, 150, -100)
   robot.pivot(-55, 150)
-  robot.act_right.run_angle(120, 120)
+  robot.act_right.run_angle(120, 100)
   robot.pivot(45, 100)
   robot.drive_mm(0, 200, -300)
   robot.act_right.run_time(1000, 500)
