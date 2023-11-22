@@ -8,15 +8,25 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 from pybricks.nxtdevices import LightSensor
 
-from robot import Generic_Robot
 from robot import Robot_Plus
-from scrim_master import start
-
-from M09 import mo9
-from M08 import mo8
-from M06 import mo6
-from M02 import mo2
 
 robot = Robot_Plus()
 
-mo2(robot)
+def mo2(robot):
+  robot.gyro_drive(0, 150, 200)
+  robot.pivot(45, 50)
+  robot.gyro_drive(0, 150, 400)
+  robot.pivot(-45, 50)
+  robot.gyro_drive(0, 150, 130)
+  robot.pivot(-45, 50)
+  robot.gyro_drive(0, 150, 50)
+  robot.drive_mm(0, 150, -50)
+
+
+  #this is for pink add this code to add more pushes
+
+  #robot.gyro_drive(0, 150, 50)
+  # robot.drive_mm(0, 150, -50)
+
+  robot.pivot(60, 50)
+  robot.drive_mm(0, 250, -800)

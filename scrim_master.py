@@ -9,8 +9,9 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 from robot import Robot_Plus
 
 from M09 import mo9
-from M04 import mo4b
+from M06 import mo6
 from M08 import mo8
+from M02 import mo2
 
 robot = Robot_Plus()
 img = ImageFile()
