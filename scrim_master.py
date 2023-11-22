@@ -15,15 +15,16 @@ from M02 import mo2
 
 robot = Robot_Plus()
 img = ImageFile()
-button_press = robot.ev3.buttons.pressed()
 
 def start(robot):
+  button_press = robot.ev3.buttons.pressed()
   while True:
     # M09 #
     while button_press != [Button.CENTER]:
       # check for advancing to next
       if button_press == [Button.DOWN]:
         break
+    wait(100)
     mo9(robot)
     break
 
@@ -33,6 +34,7 @@ def start(robot):
       # check for advancing to next
       if button_press == [Button.DOWN]:
         break
+    wait(100)
     mo4b(robot)
     break
 
@@ -42,5 +44,6 @@ def start(robot):
       # check for advancing to next
       if button_press == [Button.DOWN]:
         break
+    wait(100)
     mo8(robot)
     break
