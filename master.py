@@ -10,34 +10,37 @@ from pybricks.media.ev3dev import SoundFile, Image, ImageFile
 class Master_Main():
   def __init__(self):
     self.ev3 = EV3Brick()
-    self.missions = []
+    self.missions = ["M09", "M02", "M04", "M08", "M15"]
 
-  def display(self):
-    yes = 0
+  def display(self, run_num):
+    current_mission = self.missions[run_num]
+    self.ev3.screen.clear()
+    self.ev3.screen.draw_text(10, 10, current_mission)
+    wait(500)
 
   def play_mission(self, run_number):
-    self.missions[mission_number].run()
+    print(self.missions[run_number])
 
   def module(self):
     run_num = 0
     while True:
-      if self.ev3.buttons.pressed == [Button.CENTER]:
+      if self.ev3.buttons.pressed() == [Button.CENTER]:
+        print("play")
         # Play current module
         self.play_mission(run_num)
-      elif self.ev3.buttons.pressed == [Button.RIGHT]:
+      elif self.ev3.buttons.pressed() == [Button.RIGHT]:
         # Move to next module
-        if run_num >= self.mission.len():
+        if run_num >= len(self.missions) - 1:
           run_num = 0
         else:
           run_num += 1
-      elif self.ev3.buttons.pressed == [Button.LEFT]:
+      elif self.ev3.buttons.pressed() == [Button.LEFT]:
         # Move to last module
-        if run_num <= 0:
-          run_num = self.missions.len()
-        else:
-          run_num -= 1
+        run_num -= 1
+        if run_num <= -1:
+          run_num = len(self.missions) - 1
       
-      self.display()
+      self.display(run_num)
 
   def start(self):
     step = 0
@@ -61,8 +64,8 @@ class Master_Main():
       step = step + 1
 
     self.ev3.screen.clear()
-    self.ev3.screen.draw_text(50, 60, "Ready!")
+    self.ev3.screen.draw_text(60, 60, "Ready!")
     self.ev3.speaker.beep(duration=200)
     wait(500)
-    
+
     self.module()
