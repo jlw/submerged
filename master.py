@@ -23,7 +23,37 @@ class Master_Main():
 
   def module(self):
     run_num = 0
+
     while True:
+      while self.ev3.buttons.pressed() == []:
+        #do nothing
+        r = 0
+      buttons = self.ev3.buttons.pressed()
+      if buttons == [Button.CENTER]:
+          print("play")
+          # Play current module
+          self.play_mission(run_num)
+          run_num += 1
+          if run_num >= len(self.missions) - 1:
+            run_num = 0
+      elif buttons == [Button.RIGHT]:
+        # Move to next module
+        if run_num >= len(self.missions) - 1:
+          run_num = 0
+        else:
+          run_num += 1
+      elif buttons == [Button.LEFT]:
+        # Move to last module
+        run_num -= 1
+        if run_num <= -1:
+          run_num = len(self.missions) - 1
+
+      self.display(run_num)
+        
+
+
+    #old code
+    while False:
       if self.ev3.buttons.pressed() == [Button.CENTER]:
         print("play")
         # Play current module
@@ -45,6 +75,8 @@ class Master_Main():
   def start(self):
     step = 0
     while step < 5:
+      #calibrate gyro & color sensors at same time
+      
       self.ev3.screen.clear()
       self.ev3.screen.draw_text(10, 10, "Initializing ")
       wait(200)
