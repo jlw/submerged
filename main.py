@@ -8,15 +8,17 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 from pybricks.nxtdevices import LightSensor
 
-from robot import Generic_Robot
-from robot import Robot_Plus
-from scrim_master import start
+#from robot import Generic_Robot
+#from robot import Robot_Plus
+#from scrim_master import start
+from master import Master_Main
 
-from M09 import mo9
-from M08 import mo8
-from M06 import mo6
-from M02 import mo2
+#from M09 import mo9
+#from M08 import mo8
+#from M06 import mo6
+#from M02 import mo2
 
-robot = Robot_Plus()
+#robot = Robot_Plus()
+master = Master_Main()
 
-mo2(robot)
+master.start()
