@@ -6,19 +6,31 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, Image, ImageFile
 
+from robot import Robot_Plus
+
+from M09 import mo9
+from M08 import mo8
+from M06 import mo6
+from M02 import mo2
+from M15 import m15
+
+robot = Robot_Plus()
 
 class Master_Main():
   def __init__(self):
     self.ev3 = EV3Brick()
-    self.missions = ["M09", "M02", "M04", "M08", "M15"]
+    self.missions = [["M09", mo9], ["M02", mo2], ["M06", mo6], ["M08", mo8], ["M15", m15]]
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
     self.ev3.screen.clear()
-    self.ev3.screen.draw_text(10, 10, current_mission)
+    self.ev3.screen.draw_text(10, 10, current_mission[0])
     wait(500)
 
   def play_mission(self, run_number):
+    run = self.missions[run_number]
+    mission = run[1]
+    mission(robot)
     print(self.missions[run_number])
 
   def module(self):
@@ -100,4 +112,5 @@ class Master_Main():
     self.ev3.speaker.beep(duration=200)
     wait(500)
 
+    self.display(0)
     self.module()
