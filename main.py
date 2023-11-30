@@ -21,4 +21,4 @@ robot = Robot_Plus()
 master = Master_Main()
 
 
-master.module()
+master.start()

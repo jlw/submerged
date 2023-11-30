@@ -105,6 +105,9 @@ class Master_Main():
     return gyro_drift
 
   def start(self):
+    cal_g = Thread(target=self.calibrate_gyro)
+    cal_g.start()
+
     step = 0
     while step < 5:
       #calibrate gyro & color sensors at same time
