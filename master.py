@@ -19,6 +19,7 @@ class Master_Main():
   def __init__(self):
     self.ev3 = EV3Brick()
     self.missions = [["M09", mo9], ["M02", mo2], ["M06", mo6], ["M08", mo8], ["M15", m15]]
+    self.wait_for_mission_end = True
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
@@ -32,20 +33,25 @@ class Master_Main():
           wait(0)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
+        self.wait_for_mission_end = False
         print("abort")
 
   def play(self, run_number):
     run = self.missions[run_number]
     mission = run[1]
     mission(robot)
-    print(self.missions[run_number])
+    print(run[0])
+    self.wait_for_mission_end = False
 
   def play_mission(self, run_number):
-    play = Thread(target=play, args=(run_number))
-    abort = Thread(target=abort, args=(play))
+    play = Thread(target=self.play, args=[run_number])
+    abort = Thread(target=self.abort, args=[play])
     
     play.start()
     abort.start()
+    while self.wait_for_mission_end:
+      wait(0)
+    self.wait_for_mission_end = True
 
   def module(self):
     run_num = 0
