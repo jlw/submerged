@@ -12,5 +12,8 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 def m15(robot):
-  robot.drive_mm(0, 250, 300)
-  robot.drive_mm(0, 200, -200)
+  robot.pivot(-75, 50)
+  robot.gyro_drive(0, 150, 250)
+  robot.pivot(-15, 50)
+  robot.gyro_drive(0, 150, 500)
+  robot.pivot(-25, 50)
