@@ -1,10 +1,7 @@
 from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
-                                 InfraredSensor, UltrasonicSensor, GyroSensor)
-from pybricks.parameters import Port, Stop, Direction, Button, Color
-from pybricks.tools import wait, StopWatch, DataLog
-from pybricks.robotics import DriveBase
-from pybricks.media.ev3dev import SoundFile, Image, ImageFile
+from pybricks.ev3devices import (ColorSensor, GyroSensor)
+from pybricks.parameters import Button
+from pybricks.tools import wait
 
 from robot import Robot_Plus
 
@@ -13,6 +10,8 @@ from M08 import mo8
 from M06 import mo6
 from M02 import mo2
 from M15 import m15
+
+from threading import Thread
 
 robot = Robot_Plus()
 
@@ -27,22 +26,35 @@ class Master_Main():
     self.ev3.screen.draw_text(10, 10, current_mission[0])
     wait(500)
 
-  def play_mission(self, run_number):
+  def abort(self, play_thread):
+    while True:
+      while self.ev3.buttons.pressed() == []:
+          wait(0)
+      buttons = self.ev3.buttons.pressed()
+      if buttons == [Button.DOWN]:
+        print("abort")
+
+  def play(self, run_number):
     run = self.missions[run_number]
     mission = run[1]
     mission(robot)
     print(self.missions[run_number])
+
+  def play_mission(self, run_number):
+    play = Thread(target=play, args=(run_number))
+    abort = Thread(target=abort, args=(play))
+    
+    play.start()
+    abort.start()
 
   def module(self):
     run_num = 0
 
     while True:
       while self.ev3.buttons.pressed() == []:
-        #do nothing
-        r = 0
+        wait(0)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.CENTER]:
-          print("play")
           # Play current module
           self.play_mission(run_num)
           run_num += 1
@@ -61,28 +73,29 @@ class Master_Main():
           run_num = len(self.missions) - 1
 
       self.display(run_num)
-        
+    
+  def calibrate_gyro(self):
+    gyro_drift = False
+    error = []
+    no_drift = 0
+    while self.ev3.buttons.pressed() != [Button.CENTER]:
+      angle = robot.gyro_sensor.angle()
+      error.append(angle)
+      for x in error:
+        if x == 0:
+          no_drift += 1
+      if no_drift >= 50:
+        gyro_drift = False
+        break
 
-
-    #old code
-    while False:
-      if self.ev3.buttons.pressed() == [Button.CENTER]:
-        print("play")
-        # Play current module
-        self.play_mission(run_num)
-      elif self.ev3.buttons.pressed() == [Button.RIGHT]:
-        # Move to next module
-        if run_num >= len(self.missions) - 1:
-          run_num = 0
-        else:
-          run_num += 1
-      elif self.ev3.buttons.pressed() == [Button.LEFT]:
-        # Move to last module
-        run_num -= 1
-        if run_num <= -1:
-          run_num = len(self.missions) - 1
+      if len(error) > 10:
+        gyro_drift = True
+        break
       
-      self.display(run_num)
+      wait(500)
+    
+    print("Gyro Drift is", gyro_drift)
+    return gyro_drift
 
   def start(self):
     step = 0
