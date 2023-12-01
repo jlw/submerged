@@ -132,7 +132,11 @@ class Robot_Plus(Generic_Robot):
     Generic_Robot.__init__(self, self.ev3, self.drive_base, self.left_motor, self.right_motor, self.left_color, self.right_color, self.gyro_sensor)
   
   def query(self):
+    print(self.name)
     return self.name
+
+  def wait(time):
+    wait(time)
 
   def high_tork_angle(self, angle, speed):
     self.act_right.run_angle(speed, angle, wait=False)
