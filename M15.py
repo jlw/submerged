@@ -1,17 +1,7 @@
-#!/usr/bin/env pybricks-micropython
-from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
-                                 InfraredSensor, UltrasonicSensor, GyroSensor)
-from pybricks.parameters import Port, Stop, Direction, Button, Color
-from pybricks.tools import wait, StopWatch, DataLog
-from pybricks.robotics import DriveBase
-from pybricks.media.ev3dev import SoundFile, ImageFile
-
-from robot import Robot_Plus
-
-robot = Robot_Plus()
-
-def m15(robot):
-  robot.gyro_drive(0, 150, 100)
-  robot.pivot(-110, 100)
-  robot.gyro_drive(0, 150, 750)
+def m15():
+  commands = [
+    ['gyro_drive',[0, 150, 100]],
+    ['pivot',[-110, 100]],
+    ['gyro_drive',[0, 150, 750]]
+  ]
+  return commands
