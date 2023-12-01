@@ -65,7 +65,7 @@ class Master_Main():
           robot.gyro_sensor.reset_angle(0)
           self.play_mission(run_num)
           run_num += 1
-          if run_num >= len(self.missions) - 1:
+          if run_num >= len(self.missions):
             run_num = 0
       elif buttons == [Button.RIGHT]:
         # Move to next module
