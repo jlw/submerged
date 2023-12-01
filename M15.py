@@ -14,4 +14,4 @@ robot = Robot_Plus()
 def m15(robot):
   robot.gyro_drive(0, 150, 100)
   robot.pivot(-110, 100)
-  robot.gyro_drive(0, 150, 700)
+  robot.gyro_drive(0, 150, 750)
