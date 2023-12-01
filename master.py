@@ -1,5 +1,6 @@
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (ColorSensor, GyroSensor)
+from pybricks.media.ev3dev import SoundFile
 from pybricks.parameters import Button
 from pybricks.tools import wait
 
@@ -55,6 +56,7 @@ class Master_Main():
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
         self.has_aborted = True
+        self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
         break
       if self.wait_for_mission_end == False:
         break
@@ -65,7 +67,7 @@ class Master_Main():
 
     while True:
       while self.ev3.buttons.pressed() == []:
-        wait(250)
+        wait(50)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.CENTER]:
           # Play current module
