@@ -56,9 +56,10 @@ class Master_Main():
         break
       if self.wait_for_mission_end == False:
         break
-    while self.wait_for_mission_end:
+    while self.wait_for_mission_end == False:
       wait(0)
     self.wait_for_mission_end = True
+    robot.reset_motors(1)
 
   def module(self):
     run_num = 0
@@ -98,7 +99,7 @@ class Master_Main():
         drift = True
         break
 
-      if count >= 20:
+      if count >= 10:
         print("No drift here!")
         drift = False
         break
