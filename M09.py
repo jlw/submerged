@@ -1,6 +1,6 @@
 def mo9():
   commands = [
-    ['gyro_drive',[0, 150, 455]],
+    ['gyro_drive',[0, 150, 455, 'True']],
     ['act_run_time',[-1000, 600, 'right', 'False']],
     ['wait',[350]],
     ['pivot',[-10, 100]],
