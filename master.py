@@ -12,6 +12,7 @@ from M02 import mo2
 from M15 import m15
 
 import threading
+import _thread
 
 robot = Robot_Plus()
 
@@ -20,6 +21,7 @@ class Master_Main():
     self.ev3 = EV3Brick()
     self.missions = [["M09", mo9], ["M02", mo2], ["M06", mo6], ["M08", mo8], ["M15", m15]]
     self.wait_for_mission_end = True
+    self.has_aborted = False
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
@@ -27,30 +29,33 @@ class Master_Main():
     self.ev3.screen.draw_text(10, 10, current_mission[0])
     wait(500)
 
-  def abort(self, play_thread):
+  def play(self, run_number):
+    run = self.missions[run_number]
+    mission = run[1]
+    commands = mission(robot)
+    for command in commands:
+      if self.has_aborted:
+        print("Mission has been aborted.")
+        self.has_aborted = False
+        break
+      getattr(robot, command[0])(*command[1])
+
+    print(run[0])
+    self.wait_for_mission_end = False
+
+  def play_mission(self, run_number):
+    _thread.start_new_thread(self.play, (run_number))
+
     while True:
       while self.ev3.buttons.pressed() == []:
           wait(0)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
+        self.has_aborted = True
         self.wait_for_mission_end = False
-        print("abort")
-
-  def play(self, run_number):
-    run = self.missions[run_number]
-    mission = run[1]
-    mission(robot)
-    print(run[0])
-    self.wait_for_mission_end = False
-
-  def play_mission(self, run_number):
-    play = threading.Thread(target=self.play, args=[run_number])
-    abort = threading.Thread(target=self.abort, args=[play])
-    
-    play.start()
-    abort.start()
-    while self.wait_for_mission_end:
-      wait(0)
+        break
+      if self.wait_for_mission_end == False:
+        break
     self.wait_for_mission_end = True
 
   def module(self):
@@ -63,7 +68,7 @@ class Master_Main():
       if buttons == [Button.CENTER]:
           # Play current module
           robot.gyro_sensor.reset_angle(0)
-          self.play_mission(run_num)
+          self.play_mission(tuple([run_num]))
           run_num += 1
           if run_num >= len(self.missions):
             run_num = 0
