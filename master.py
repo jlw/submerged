@@ -32,7 +32,7 @@ class Master_Main():
   def play(self, run_number):
     run = self.missions[run_number]
     mission = run[1]
-    commands = mission(robot)
+    commands = mission()
     for command in commands:
       if self.has_aborted:
         print("Mission has been aborted.")
