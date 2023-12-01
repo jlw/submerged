@@ -87,28 +87,33 @@ class Master_Main():
       self.display(run_num)
     
   def calibrate_gyro(self):
-    gyro_drift = False
-    error = []
-    no_drift = 0
+    error = 0
+    count = 0
+    drift = False
     while self.ev3.buttons.pressed() != [Button.CENTER]:
-      angle = robot.gyro_sensor.angle()
-      error.append(angle)
-      for x in error:
-        if x == 0:
-          no_drift += 1
-      if no_drift >= 50:
-        gyro_drift = False
+      if error != 0:
+        print("Gyro is drifing!")
+        drift = True
         break
 
-      if len(error) > 10:
-        gyro_drift = True
+      if count >= 20:
+        print("No drift here!")
+        drift = False
         break
-      
+  
+      error = (robot.gyro_sensor.angle())
+      count += 1
+      print("Error is", error,". . ", "Looped", count, "times.")
       wait(500)
     
-    self.ev3.screen.draw_text(50, 80, gyro_drift)
-    print("Gyro Drift is", gyro_drift)
-    return gyro_drift
+    if drift:
+      self.ev3.screen.draw_text(55, 80, "Drifting.")
+      self.ev3.screen.clear()
+      wait(2000)
+    elif drift == False:
+      self.ev3.screen.draw_text(55, 80, "No Drift.")
+      self.ev3.screen.clear()
+      wait(2000)
 
   def start(self):
     cal_g = threading.Thread(target=self.calibrate_gyro)
