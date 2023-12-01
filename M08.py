@@ -1,6 +1,6 @@
 def mo8():
   commands = [
-    ['pivot',[-90 100]],
+    ['pivot',[-90, 100]],
     ['gyro_drive',[-90, 150, 145, 'reset_sensor=False']],
     ['pivot',[45, 100]],
     ['gyro_drive',[0, 200, 350]],
