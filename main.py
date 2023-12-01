@@ -21,5 +21,13 @@ from M15 import m15
 robot = Robot_Plus()
 master = Master_Main()
 
-
 master.start()
+
+
+commands = [
+  ['robot','pivot', [45, 100]],
+  ['robot','gyro_drive', [0, 40, 40]]
+]
+
+#for command in commands:
+ #print(getattr(command[0], command[1])(*command[2]))

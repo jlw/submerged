@@ -11,7 +11,7 @@ from M06 import mo6
 from M02 import mo2
 from M15 import m15
 
-from threading import Thread
+import threading
 
 robot = Robot_Plus()
 
@@ -44,8 +44,8 @@ class Master_Main():
     self.wait_for_mission_end = False
 
   def play_mission(self, run_number):
-    play = Thread(target=self.play, args=[run_number])
-    abort = Thread(target=self.abort, args=[play])
+    play = threading.Thread(target=self.play, args=[run_number])
+    abort = threading.Thread(target=self.abort, args=[play])
     
     play.start()
     abort.start()
@@ -101,11 +101,12 @@ class Master_Main():
       
       wait(500)
     
+    self.ev3.screen.draw_text(50, 80, gyro_drift)
     print("Gyro Drift is", gyro_drift)
     return gyro_drift
 
   def start(self):
-    cal_g = Thread(target=self.calibrate_gyro)
+    cal_g = threading.Thread(target=self.calibrate_gyro)
     cal_g.start()
 
     step = 0
@@ -133,7 +134,7 @@ class Master_Main():
     self.ev3.screen.clear()
     self.ev3.screen.draw_text(60, 60, "Ready!")
     self.ev3.speaker.beep(duration=200)
-    wait(500)
+    wait(1000)
 
     self.display(0)
     self.module()
