@@ -39,6 +39,7 @@ class Master_Main():
         self.has_aborted = False
         break
       getattr(robot, command[0])(*command[1])
+    commands = []
 
     print(run[0])
     self.wait_for_mission_end = False
@@ -55,6 +56,8 @@ class Master_Main():
         break
       if self.wait_for_mission_end == False:
         break
+    while self.wait_for_mission_end:
+      wait(0)
     self.wait_for_mission_end = True
 
   def module(self):
@@ -108,10 +111,12 @@ class Master_Main():
     if drift:
       self.ev3.screen.draw_text(55, 80, "Drifting.")
       self.ev3.screen.clear()
+      self.display(0)
       wait(2000)
     elif drift == False:
       self.ev3.screen.draw_text(55, 80, "No Drift.")
       self.ev3.screen.clear()
+      self.display(0)
       wait(2000)
 
   def start(self):
