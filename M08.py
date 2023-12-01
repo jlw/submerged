@@ -1,23 +1,13 @@
-#!/usr/bin/env pybricks-micropython
-from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
-                                 InfraredSensor, UltrasonicSensor, GyroSensor)
-from pybricks.parameters import Port, Stop, Direction, Button, Color
-from pybricks.tools import wait, StopWatch, DataLog
-from pybricks.robotics import DriveBase
-from pybricks.media.ev3dev import SoundFile, ImageFile
-
-from robot import Robot_Plus
-
-robot = Robot_Plus()
-
-def mo8(robot):
-  robot.pivot(-90, 100)
-  robot.gyro_drive(-90, 150, 145, reset_sensor=False)
-  robot.pivot(45, 100)
-  robot.drive_mm(0, 200, 350)
-  robot.high_tork_time(400, 4500)
-  robot.drive_mm(0, 150, -310)
-  robot.left_motor.run_angle(75, -215)
-  robot.drive_mm(0, 200, 210)
-  robot.drive_mm(0, 250, -380)
+def mo8():
+  commands = [
+    ['pivot',[-90 100]],
+    ['gyro_drive',[-90, 150, 145, 'reset_sensor=False']],
+    ['pivot',[45, 100]],
+    ['gyro_drive',[0, 200, 350]],
+    ['high_tork_time',[400, 4500]],
+    ['drive_mm',[0, 150, -310]],
+    ['left_motor.run_angle',[75, -215]],
+    ['drive_mm',[0, 200, 210]],
+    ['drive_mm',[0, 250, -380]]
+  ]
+  return commands
