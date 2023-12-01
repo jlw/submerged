@@ -52,7 +52,6 @@ class Master_Main():
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
         self.has_aborted = True
-        self.wait_for_mission_end = False
         break
       if self.wait_for_mission_end == False:
         break
