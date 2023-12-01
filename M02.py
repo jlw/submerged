@@ -13,13 +13,12 @@ from robot import Robot_Plus
 robot = Robot_Plus()
 
 def mo2(robot):
-  robot.gyro_drive(0, 150, 200)
-  robot.pivot(45, 50)
-  robot.gyro_drive(0, 150, 400)
-  robot.pivot(-45, 50)
-  robot.gyro_drive(0, 150, 130)
-  robot.pivot(-45, 50)
-  robot.gyro_drive(0, 150, 50)
+  robot.gyro_drive(0, 150, 100)
+  robot.pivot(30, 100)
+  robot.gyro_drive(0, 150, 550)
+  robot.pivot(-90, 100)
+
+  robot.gyro_drive(0, 150, 100)
   robot.drive_mm(0, 150, -50)
 
 
@@ -28,5 +27,5 @@ def mo2(robot):
   #robot.gyro_drive(0, 150, 50)
   # robot.drive_mm(0, 150, -50)
 
-  robot.pivot(60, 50)
-  robot.drive_mm(0, 250, -800)
+  robot.pivot(60, 100)
+  robot.drive_mm(0, 500, -800)
