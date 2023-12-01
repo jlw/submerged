@@ -22,6 +22,7 @@ class Master_Main():
     self.missions = [["M09", mo9], ["M02", mo2], ["M06", mo6], ["M08", mo8], ["M15", m15]]
     self.wait_for_mission_end = True
     self.has_aborted = False
+    self.count = 0
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
@@ -45,20 +46,18 @@ class Master_Main():
     self.wait_for_mission_end = False
 
   def play_mission(self, run_number):
+    self.wait_for_mission_end = True
     _thread.start_new_thread(self.play, (run_number))
 
-    while True:
+    while self.wait_for_mission_end:
       while self.ev3.buttons.pressed() == []:
-          wait(0)
+        wait(250)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
         self.has_aborted = True
         break
       if self.wait_for_mission_end == False:
         break
-    while self.wait_for_mission_end == False:
-      wait(0)
-    self.wait_for_mission_end = True
     robot.reset_motors(1)
 
   def module(self):
@@ -66,7 +65,7 @@ class Master_Main():
 
     while True:
       while self.ev3.buttons.pressed() == []:
-        wait(0)
+        wait(250)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.CENTER]:
           # Play current module
@@ -91,7 +90,7 @@ class Master_Main():
     
   def calibrate_gyro(self):
     error = 0
-    count = 0
+    self.count = 0
     drift = False
     while self.ev3.buttons.pressed() != [Button.CENTER]:
       if error != 0:
@@ -99,14 +98,14 @@ class Master_Main():
         drift = True
         break
 
-      if count >= 10:
+      if self.count >= 10:
         print("No drift here!")
         drift = False
         break
   
       error = (robot.gyro_sensor.angle())
-      count += 1
-      print("Error is", error,". . ", "Looped", count, "times.")
+      self.count += 1
+      print("Error is", error,". . ", "Looped", self.count, "times.")
       wait(500)
     
     if drift:
@@ -124,8 +123,7 @@ class Master_Main():
     cal_g = threading.Thread(target=self.calibrate_gyro)
     cal_g.start()
 
-    step = 0
-    while step < 5:
+    while self.count < 10:
       #calibrate gyro & color sensors at same time
       
       self.ev3.screen.clear()
@@ -143,8 +141,6 @@ class Master_Main():
       self.ev3.screen.clear()
       self.ev3.screen.draw_text(10, 10, "Initializing . . .")
       wait(200)
-
-      step = step + 1
 
     self.ev3.screen.clear()
     self.ev3.screen.draw_text(60, 60, "Ready!")
