@@ -137,6 +137,12 @@ class Robot_Plus(Generic_Robot):
   def wait(self, time):
     wait(time)
 
+  def reset_motors(self, ok):
+    self.act_left.run_angle(1, 1, then=Stop.BRAKE)
+    self.act_right.run_angle(1, 1, then=Stop.BRAKE)
+    self.left_motor.run_angle(1, 1, then=Stop.BRAKE)
+    self.right_motor.run_angle(1, 1, then=Stop.BRAKE)
+
   def act_run_time(self, speed, time, motor, wait):
     if motor == "left": # <- Left Motor
       self.act_left.run_time(speed, time, wait=wait)
