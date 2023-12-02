@@ -52,13 +52,11 @@ class Master_Main():
 
     while self.wait_for_mission_end:
       while self.ev3.buttons.pressed() == []:
-        wait(250)
+        wait(50)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
         self.has_aborted = True
         self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
-        break
-      if self.wait_for_mission_end == False:
         break
     robot.reset_motors(1)
 
