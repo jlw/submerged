@@ -38,6 +38,7 @@ class Master_Main():
     for command in commands:
       if self.has_aborted:
         print("Mission has been aborted.")
+        self.ev3.speaker.beep()
         self.has_aborted = False
         break
       getattr(robot, command[0])(*command[1])
