@@ -8,7 +8,7 @@ def mo8():
     ['high_tork_time',[400, 4750]],
     ['drive_mm',[0, 150, -300]],
     ['pivot',[-55, 100]],
-    ['drive_mm',[0, 200, 210]],
+    ['drive_mm',[0, 200, 190]],
     ['drive_mm',[0, 250, -380]]
   ]
   return commands
