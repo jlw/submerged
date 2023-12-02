@@ -57,7 +57,6 @@ class Master_Main():
       if buttons == [Button.DOWN]:
         self.has_aborted = True
         self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
-        break
     robot.reset_motors(1)
 
   def module(self):
