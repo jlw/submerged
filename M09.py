@@ -6,7 +6,7 @@ def mo9():
     ['pivot',[-10, 100]],
     ['drive_mm',[0, 150, -100]],
     ['pivot',[-55, 150]],
-    ['act_run_angle',[180, 100, 'right', 'True']],
+    ['act_run_angle',[220, 100, 'right', 'True']],
     ['pivot',[20, 100]],
     ['act_run_time',[-700, 500, 'right', 'True']],
     ['pivot',[25, 100]],
