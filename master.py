@@ -41,7 +41,7 @@ class Master_Main():
         self.ev3.speaker.beep()
         self.has_aborted = False
         break
-      getattr(robot, command[0])(*command[1])
+      command.run()
     commands = []
 
     print(run[0])

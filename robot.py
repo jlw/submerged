@@ -143,23 +143,16 @@ class Robot_Plus(Generic_Robot):
     self.left_motor.run_angle(1, 1, then=Stop.BRAKE)
     self.right_motor.run_angle(1, 1, then=Stop.BRAKE)
 
-  def act_run_time(self, speed, time, motor, wait):
+  def act_run_time(self, motor, speed, time, wait):
     if motor == "left": # <- Left Motor
       self.act_left.run_time(speed, time, wait=wait)
     elif motor == "right": # <- Right Motor
       self.act_right.run_time(speed, time, wait=wait)
-  def act_run_angle(self, angle, speed, motor, wait):
+  def act_run_angle(self, motor, angle, speed, wait):
     if motor == "left": # <- Left Motor
       self.act_left.run_angle(angle, speed, wait=wait)
     elif motor == "right": # <- Right Motor
       self.act_right.run_angle(angle, speed, wait=wait)
-
-  def high_tork_angle(self, angle, speed):
-    self.act_right.run_angle(speed, angle, wait=False)
-    self.act_left.run_angle(speed, angle)
-  def high_tork_time(self, speed, time):
-    self.act_right.run_time(speed, time, wait=False)
-    self.act_left.run_time(speed, time)
 
   def drive_tank(self, motor_degrees, left_speed, right_speed):
     self.left_motor.run_angle(left_speed, motor_degrees, then=Stop.BRAKE, wait=False)
