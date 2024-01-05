@@ -14,7 +14,7 @@ from robot import Robot_Plus
 
 robot = Robot_Plus()
 
-
+robot.gyro_drive(0, 150, 1000, 6, 0.15, 1.5)
 # working: robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
 
 
