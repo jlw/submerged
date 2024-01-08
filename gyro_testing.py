@@ -11,10 +11,15 @@ from pybricks.nxtdevices import LightSensor
 from robot import Generic_Robot
 from robot import Robot_Plus
 
+## deltaTime = 0.0099343s
+## Oscillation Period = 0.2s
+Kc = 13.5
+dT = 0.0099343
+Pc = 0.1
 
 robot = Robot_Plus()
 
-robot.gyro_drive(0, 150, 1000, 6, 0.15, 1.5)
+robot.gyro_drive(0, 150, 300, 0.60 * Kc, 0.01, 0)
 # working: robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
 
 

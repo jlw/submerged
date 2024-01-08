@@ -61,7 +61,6 @@ class Generic_Robot:
     pid_controller = PIDController(gainP, gainI, gainD)
     while self.robot.distance() < distance_mm:
       self.robot.drive(speed, pid_controller.adjust(angle - self.gyro.angle()))
-      #print(self.gyro.angle(), self.robot.state())
     self.robot.stop()
     self.lm.brake()
     self.rm.brake()
