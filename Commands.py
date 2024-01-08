@@ -53,7 +53,10 @@ class DriveMotor:
     self.wait = wait
 
   def run(self):
-    self.bilbo.gyro_drive(self.angle, self.speed, self.wait)
+    if self.motor == "left":
+      self.bilbo.left_motor.run_angle(self.speed, self.angle, self.wait)
+    elif self.motor == "right":
+      self.bilbo.right_motor.run_angle(self.speed, self.angle, self.wait)
 
 class ActMotorAngle:
   def __init__(self, motor, angle, speed, wait=True):
