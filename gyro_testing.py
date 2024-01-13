@@ -19,7 +19,7 @@ Pc = 0.1
 
 robot = Robot_Plus()
 
-robot.gyro_drive(0, 150, 300, 0.60 * Kc, 0.01, 0)
+# working: robot.gyro_drive(0, 150, 300, 0.60 * Kc, 0, 0)
 # working: robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
 
 
