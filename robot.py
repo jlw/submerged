@@ -54,7 +54,7 @@ class Generic_Robot:
     self.drive_tank(motor_degrees, left_speed, right_speed)
 
   ### DRIVE GYRO MILIMETERS ###
-  def gyro_drive(self, angle, speed, distance_mm, gainP=6, gainI=0.15, gainD=1.5, reset_sensor=True):
+  def gyro_drive(self, angle, speed, distance_mm, gainP=8.1, gainI=0, gainD=0, reset_sensor=True):
     self.robot.reset()
     if reset_sensor == True:
       self.gyro.reset_angle(0)
