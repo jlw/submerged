@@ -9,10 +9,10 @@ class GyroDrive:
     self.reset_sensor = reset_sensor
 
   def run(self):
-    self.bilbo.gyro_drive(self.angle, self.speed, self.distance_mm, self.reset_sensor)
+    self.bilbo.gyro_drive(self.angle, self.speed, self.distance_mm, reset_sensor=self.reset_sensor)
 
 class DriveMM:
-  def __init__(self, angle, speed, distance, rate=500, brake=True):
+  def __init__(self, angle=0, speed=0, distance=0, rate=500, brake=True):
     self.bilbo = Robot_Plus()
     self.angle = angle
     self.speed = speed
@@ -79,3 +79,11 @@ class ActMotorTime:
 
   def run(self):
     self.bilbo.act_run_time(self.motor, self.speed, self.time, self.wait)
+
+class Wait:
+  def __init__(self, time=0):
+    self.bilbo = Robot_Plus()
+    self.time = time
+
+  def run(self):
+    self.bilbo.wait(self.time)
