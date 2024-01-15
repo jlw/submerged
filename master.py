@@ -15,12 +15,11 @@ from M14 import m14
 import threading
 import _thread
 
-robot = Robot_Plus()
-
 class Master_Main():
   def __init__(self):
+    self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
-    self.missions = [["M06", mo6], ["M08", mo8], ["M14", m14], ["M02", mo2], ["M09", mo9]]
+    self.missions = [["M06", mo6()], ["M08", mo8()], ["M14", m14()], ["M02", mo2()], ["M09", mo9()]]
     self.wait_for_mission_end = True
     self.has_aborted = False
     self.count = 0
@@ -33,15 +32,14 @@ class Master_Main():
 
   def play(self, run_number):
     run = self.missions[run_number]
-    mission = run[1]
-    commands = mission()
+    commands = run[1]
     for command in commands:
       if self.has_aborted:
         print("Mission has been aborted.")
         self.ev3.speaker.beep()
         self.has_aborted = False
         break
-      command.run()
+      command.run(self.robot)
     commands = []
 
     print(run[0])
@@ -58,7 +56,7 @@ class Master_Main():
       if buttons == [Button.DOWN]:
         self.has_aborted = True
         self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
-    #robot.reset_motors(1)
+    #self.robot.reset_motors(1)
 
   def module(self):
     run_num = 0
@@ -69,7 +67,7 @@ class Master_Main():
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.CENTER]:
           # Play current module
-          robot.gyro_sensor.reset_angle(0)
+          self.robot.gyro_sensor.reset_angle(0)
           self.play_mission(tuple([run_num]))
           run_num += 1
           if run_num >= len(self.missions):
@@ -103,7 +101,7 @@ class Master_Main():
         drift = False
         break
   
-      error = (robot.gyro_sensor.angle())
+      error = (self.robot.gyro_sensor.angle())
       self.count += 1
       print("Error is", error,". . ", "Looped", self.count, "times.")
       wait(500)
