@@ -18,8 +18,8 @@ class Generic_Robot:
     self.sen2 = LightSensorRight
     self.gyro = GyroSensor
     self.stopWatch = StopWatch()
-    self.left_color_range = 0
-    self.right_color_range = 0
+    self.left_color_percent = 0
+    self.right_color_percent = 0
     self.left_color_black = 0
     self.right_color_black = 0
 
@@ -82,80 +82,94 @@ class Generic_Robot:
 
     self.ev3.screen.clear()
     self.ev3.screen.draw_text(10, 10, "Align Sensors on")
-    self.ev3.screen.draw_text(10, 50, "Black")
+    self.ev3.screen.draw_text(10, 40, "Black")
     while self.ev3.buttons.pressed() != [Button.CENTER]:
       wait(50)
     self.left_color_black = self.sen1.reflection()
     self.right_color_black = self.sen2.reflection()
 
-    self.left_color_range = left_white - self.left_color_black
-    self.right_color_range = right_white - self.right_color_black
+    left_color_range = left_white - self.left_color_black
+    right_color_range = right_white - self.right_color_black
+    self.left_color_percent = left_color_range / 100.0    #This is 1 percent value (Essentially black)
+    self.right_color_percent = right_color_range / 100.0
     self.ev3.screen.clear()
 
     wait(500)
 
   def ajustReading(self, reading, leftOrRight):
       if leftOrRight == "Left":
+        print(reading, self.left_color_black)
         return reading - self.left_color_black
       else:
         return reading - self.right_color_black
+        print(reading, self.right_color_black)
 
   ### ULTIMATE LINE SQUARING ###
-  def black_line_square(self, target, targetBlack, targetWhite, approachSpeed, finetuneSpeed, returnTime):
-    def waitUntil(sensor, input1):
-      while sensor.reflection() <= input1:
+  def black_line_square(self, targetFast, targetBlack, targetWhite, approachSpeed, finetuneSpeed, returnTime):
+    def waitUntil(sensor, input1, direction):
+      while self.ajustReading(sensor.reflection(), direction) <= input1:
         wait(0)
+
     def colorIsInRange(value):
-      if targetBlack <= value and targetWhite >= value:
+      if targetBlack < value and targetWhite > value:
         return True
       else:
         return False
+
     # Initiate Variables
     self.ev3.light.on(Color.RED)
     reverseFinetuneSpeed = (0 - finetuneSpeed)
     self.stopWatch.pause()
     self.stopWatch.reset()
     self.stopWatch.resume()
+    targetFineTune = range(40, 45)
     # Roughly lines up with the black line
     self.robot.drive(0, approachSpeed)
     while True:
       ref1 = self.ajustReading(self.sen1.reflection(), "Left")
       ref2 = self.ajustReading(self.sen2.reflection(), "Right")
 
-      if ref1 <= target:
+      self.robot.drive(approachSpeed, 0)
+
+      if ref1 <= targetFast:
         self.robot.stop()
         self.lm.hold()
         self.rm.run(approachSpeed)
-        waitUntil(self.sen2, target)
+        waitUntil(self.sen2, targetFast, "Right")
         self.rm.hold()
         break
-      elif ref2 <= target:
+      elif ref2 <= targetFast:
         self.robot.stop()
         self.rm.hold()
         self.lm.run(approachSpeed)
-        waitUntil(self.sen1, target)
+        waitUntil(self.sen1, targetFast, "Left")
         self.lm.hold()
         break
     # Sets status light to Yellow for fine tuning
     self.ev3.light.on(Color.YELLOW)
-    while (colorIsInRange(ref1) and colorIsInRange(ref2)) or self.stopWatch.time() >= returnTime:
+    while ref1 not in targetFineTune or ref2 not in targetFineTune:
       ref1 = self.ajustReading(self.sen1.reflection(), "Left")
       ref2 = self.ajustReading(self.sen2.reflection(), "Right")
 
       # Fine tunes the left motor
-      if ref1 < targetBlack:
-        self.lm.run(reverseFinetuneSpeed)
-      elif self.sen1.reflection() > targetWhite:
-        self.lm.run(finetuneSpeed)
-      else:
+      if ref1 in targetFineTune:
         self.lm.hold()
-      # Fine tunes the right motor
-      if ref2 < targetBlack:
-        self.rm.run(reverseFinetuneSpeed)
-      elif self.sen2.reflection() > targetWhite:
-        self.rm.run(finetuneSpeed)
+      elif ref1 < min(targetFineTune):
+        self.lm.run(reverseFinetuneSpeed)
       else:
+        self.lm.run(finetuneSpeed)
+      # Fine tunes the right motor
+      if ref2 in targetFineTune:
         self.rm.hold()
+      elif ref2 < min(targetFineTune):
+        self.rm.run(reverseFinetuneSpeed)
+      else:
+        self.rm.run(finetuneSpeed)
+
+      if self.stopWatch.time() >= returnTime:
+        break
+    self.lm.hold()
+    self.rm.hold()
     self.ev3.light.on(Color.GREEN)
 
 

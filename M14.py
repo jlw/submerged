@@ -7,5 +7,5 @@ def m14():
     ['gyro_drive',[0, 150, 750, 'True']]
   ]
   return [
-    Commands.LineSquare(target=20, targetBlack=13, targetWhite=80, approachSpeed=150, finetuneSpeed=50)
+    Commands.LineSquare(target=10, targetBlack=10, targetWhite=85, approachSpeed=100, finetuneSpeed=25)
   ]

@@ -33,7 +33,7 @@ class Pivot:
     robot.wait(self.wait)
 
 class LineSquare:
-  def __init__(self, target, targetBlack, targetWhite, approachSpeed, finetuneSpeed, returnTime=2):
+  def __init__(self, target, targetBlack, targetWhite, approachSpeed, finetuneSpeed, returnTime=2500):
     self.target = target
     self.targetBlack = targetBlack
     self.targetWhite = targetWhite
