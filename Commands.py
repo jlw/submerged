@@ -22,12 +22,15 @@ class DriveMM:
     robot.drive_mm(self.angle, self.speed, self.distance_mm, self.rate, self.brake)
 
 class Pivot:
-  def __init__(self, angle, speed):
+  def __init__(self, angle, speed, wait=75):
     self.angle = angle
     self.speed = speed
+    self.wait = wait
 
   def run(self, robot):
+    robot.wait(self.wait)
     robot.pivot(self.angle, self.speed)
+    robot.wait(self.wait)
 
 class LineSquare:
   def __init__(self, target, targetBlack, targetWhite, approachSpeed, finetuneSpeed):
