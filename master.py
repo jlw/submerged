@@ -10,7 +10,7 @@ from M09 import mo9
 from M08 import mo8
 from M06 import mo6
 from M02 import mo2
-from M15 import m15
+from M14 import m14
 
 import threading
 import _thread
@@ -20,7 +20,7 @@ robot = Robot_Plus()
 class Master_Main():
   def __init__(self):
     self.ev3 = EV3Brick()
-    self.missions = [["M09", mo9], ["M02", mo2], ["M06", mo6], ["M08", mo8], ["M15", m15]]
+    self.missions = [["M06", mo6], ["M08", mo8], ["M14", m14], ["M02", mo2], ["M09", mo9]]
     self.wait_for_mission_end = True
     self.has_aborted = False
     self.count = 0
