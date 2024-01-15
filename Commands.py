@@ -33,15 +33,16 @@ class Pivot:
     robot.wait(self.wait)
 
 class LineSquare:
-  def __init__(self, target, targetBlack, targetWhite, approachSpeed, finetuneSpeed):
+  def __init__(self, target, targetBlack, targetWhite, approachSpeed, finetuneSpeed, returnTime=2):
     self.target = target
     self.targetBlack = targetBlack
     self.targetWhite = targetWhite
     self.approachSpeed = approachSpeed
     self.finetuneSpeed = finetuneSpeed
+    self.returnTime = returnTime
 
   def run(self, robot):
-    robot.black_line_square(self.target, self.targetBlack, self.targetWhite, self.approachSpeed, self.finetuneSpeed)
+    robot.black_line_square(self.target, self.targetBlack, self.targetWhite, self.approachSpeed, self.finetuneSpeed, self.returnTime)
 
 class DriveMotor:
   def __init__(self, motor, angle, speed, wait=True):
