@@ -145,5 +145,7 @@ class Master_Main():
     self.ev3.speaker.beep(duration=200)
     wait(1000)
 
+    self.robot.calibrate_color()
+    
     self.display(0)
     self.module()
