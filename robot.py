@@ -98,11 +98,9 @@ class Generic_Robot:
 
   def ajustReading(self, reading, leftOrRight):
       if leftOrRight == "Left":
-        print(reading, self.left_color_black)
         return reading - self.left_color_black
       else:
         return reading - self.right_color_black
-        print(reading, self.right_color_black)
 
   ### ULTIMATE LINE SQUARING ###
   def black_line_square(self, targetFast, targetBlack, targetWhite, approachSpeed, finetuneSpeed, returnTime):
