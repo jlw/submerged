@@ -1,14 +1,6 @@
 import Commands
 
 def mo6():
-  commands = [
-    ['act_run_time',[700, 400, 'right', 'True']],
-    ['wait',[100]],
-    ['pivot',[20, 100]],
-    ['drive_mm',[0, 200, -100]],
-    ['pivot',[-90, 100]],
-    ['drive_mm',[0, 300, -750]]
-  ]
   return [
     # Drive to & Complete M01
     Commands.ActMotorTime(motor="right", speed=500, time=500, wait=False),
