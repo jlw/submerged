@@ -30,8 +30,9 @@ class Generic_Robot:
       self.robot.settings(speed, rate)
       self.robot.straight(mm)
     else:
+      self.robot.drive(speed, angle)
       while self.robot.distance() < mm:
-        self.robot.drive(speed, angle)
+        wait(0)
     self.robot.stop()
     self.lm.brake()
     self.rm.brake()
