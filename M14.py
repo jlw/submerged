@@ -1,11 +1,15 @@
 import Commands
 
 def m14():
-  commands = [
-    ['gyro_drive',[0, 150, 100, 'True']],
-    ['pivot',[-110, 100]],
-    ['gyro_drive',[0, 150, 750, 'True']]
-  ]
   return [
-    Commands.LineSquare(target=10, targetBlack=10, targetWhite=85, approachSpeed=100, finetuneSpeed=25)
+    Commands.DriveMM(angle=12, speed=125, distance=355),
+    Commands.Wait(time=75),
+    Commands.DriveMM(angle=-14, speed=125, distance=270),
+    Commands.Wait(time=75),
+    Commands.ActMotorTime(motor='left', speed=-250, time=1000, wait=False),
+    Commands.GyroDrive(angle=0, speed=150, distance=260, reset_sensor=False),
+    Commands.ActMotorTime(motor='right', speed=-250, time=1000),
+    Commands.GyroDrive(speed=100, distance=240),
+    Commands.ActMotorTime(motor='left', speed=250, time=1000),
+    Commands.GyroDrive(speed=200, distance=800),
   ]
