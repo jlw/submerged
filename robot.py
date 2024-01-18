@@ -212,6 +212,6 @@ class Robot_Plus(Generic_Robot):
       self.act_right.run_time(speed, time, wait=wait)
   def act_run_angle(self, motor, angle, speed, wait):
     if motor == "left": # <- Left Motor
-      self.act_left.run_angle(angle, speed, wait=wait)
+      self.act_left.run_angle(speed, angle, wait=wait)
     elif motor == "right": # <- Right Motor
-      self.act_right.run_angle(angle, speed, wait=wait)
+      self.act_right.run_angle(speed, angle, wait=wait)
