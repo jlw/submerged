@@ -14,7 +14,7 @@ from robot import Robot_Plus
 ## deltaTime = 0.0099343s
 ## Oscillation Period = 0.2s
 Kc = 13.5
-dT = 0.0099343
+dT = 9.9343 #ms
 Pc = 0.1
 
 robot = Robot_Plus()
@@ -22,8 +22,41 @@ robot = Robot_Plus()
 # working: robot.gyro_drive(0, 150, 300, 0.60 * Kc, 0, 0)
 # working: robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
 
-robot.gyro_drive(0, 200, 0, 0, 0)
+## NEW OBJECTIVE: TUNE TO 200mm/s
+# base: robot.gyro_drive(0, 200, 700, 0, 0, 0)
 
+# Zeigler-Nichols Wikipedia: robot.gyro_drive(0, 200, 700, 4.926, 0.0150, 404.3606)
+# Zeigler-Nichols ScieneDirect: robot.gyro_drive(0, 200, 700, 4.926, 1.312, 0.082)
+# Zeigler-Nichols MSTAR-labs: robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
+
+# Kc = 8.21 @ 20hz
+# dT = 50ms / 20hz
+
+## Oscillation Tests
+# timer = StopWatch()
+# timer.pause()
+# timer.reset()
+# timer.resume()
+# robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
+# timer.pause()
+# print(timer.time())
+
+# oscillated 6 times within 3686ms 1
+# oscillated 6 times within 3690ms 2
+# oscillated 5 times within 3663ms 3
+# oscillated 6 times within 3655ms 4
+# oscillated 5 times within 3687ms 5
+# oscillated 5 times within 3679ms 6
+# oscillated 6 times within 3704ms 7
+# oscillated 6 times within 3669ms 8
+# oscillated 6 times within 3679ms 9
+# oscillated 5 times within 3663ms 10
+
+# avg runtime = 3677.5 over 700mm
+# avg oscillations per run = 5.6 over 700mm
+# Pc = 656.6964285714287ms
+
+robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
 
 
 
