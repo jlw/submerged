@@ -8,7 +8,7 @@ class PIDController:
     self.integral = 0
     self.last_error = 0
 
-    self.desiredTime = 50
+    self.desiredTime = 100
     
   def adjust(self, error):
     wait(self.desiredTime)

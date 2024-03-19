@@ -20,14 +20,18 @@ Pc = 0.1
 robot = Robot_Plus()
 
 # working: robot.gyro_drive(0, 150, 300, 0.60 * Kc, 0, 0)
-# working: robot.gyro_drive(0, 150, 1200, 6, 0.15, 1.5)
+# working: Zeigler-Nichols MSTAR-labs fast (better than previous)
+# working: Zeigler-Nichols MSTAR-labs slow (best)
 
 ## NEW OBJECTIVE: TUNE TO 200mm/s
 # base: robot.gyro_drive(0, 200, 700, 0, 0, 0)
 
 # Zeigler-Nichols Wikipedia: robot.gyro_drive(0, 200, 700, 4.926, 0.0150, 404.3606)
 # Zeigler-Nichols ScieneDirect: robot.gyro_drive(0, 200, 700, 4.926, 1.312, 0.082)
-# Zeigler-Nichols MSTAR-labs: robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
+# Zeigler-Nichols MSTAR-labs {fast dT}: robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
+# Zeigler-Nichols MSTAR-labs {slow dT}: robot.gyro_drive(0, 200, 700, 3.719, 0.54, 0.1125)
+
+####### FASTER DELTA TIME
 
 # Kc = 8.21 @ 20hz
 # dT = 50ms / 20hz
@@ -56,7 +60,40 @@ robot = Robot_Plus()
 # avg oscillations per run = 5.6 over 700mm
 # Pc = 656.6964285714287ms
 
-robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
+#robot.gyro_drive(0, 200, 700, 4.926, 0.328, 0.082)
+
+
+
+####### SLOWER DELTA TIME
+
+# Kc = 6.2 @ 40hz
+# dT = 100ms / 40hz
+
+## Oscillation Tests
+# timer = StopWatch()
+# timer.pause()
+# timer.reset()
+# timer.resume()
+# robot.gyro_drive(0, 200, 700, 6.35, 0, 0)
+# timer.pause()
+# print(timer.time())
+
+# oscillated 4 times within 3789ms 1
+# oscillated 4 times within 3788ms 2
+# oscillated 4 times within 3811ms 3
+# oscillated 4 times within 3777ms 4
+# oscillated 4 times within 3768ms 5
+# oscillated 5 times within 3792ms 6
+# oscillated 4 times within 3776ms 7
+# oscillated 4 times within 3780ms 8
+# oscillated 4 times within 3784ms 9
+# oscillated 5 times within 3765ms 10
+
+# avg runtime = 3783ms over 700mm
+# avg oscillations per run = 4.2 over 700mm
+# Pc = 900.7142857142857ms
+
+robot.gyro_drive(0, 200, 700, 3.719, 0.54, 0.1125)
 
 
 
