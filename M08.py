@@ -15,10 +15,10 @@ def mo8():
 #     Commands.DriveMM(angle=0, speed=250, distance=-500)
 
 
-  Commands.GyroDrive(speed=150, distance=22.5),
+  Commands.GyroDrive(speed=150, distance=3),
   Commands.Pivot(angle=-90, speed=100),
   Commands.GyroDrive(speed=200, distance=311.5),
-  Commands.GyroDrive(speed=200, distance=-180.5),
+  Commands.GyroDrive(speed=200, distance=-200),
   Commands.Pivot(angle=45, speed=150)
   #Commands.GyroDrive()
 ]
