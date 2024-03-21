@@ -1,7 +1,7 @@
 from robot import Robot_Plus
 
 class GyroDrive:
-  def __init__(self, angle=0, speed=0, distance=0, reset_sensor=True):
+  def __init__(self, angle=0, speed=200, distance=0, reset_sensor=True):
     self.angle = angle
     self.speed = speed
     self.distance_mm = distance
@@ -11,7 +11,7 @@ class GyroDrive:
     robot.gyro_drive(self.angle, self.speed, self.distance_mm, reset_sensor=self.reset_sensor)
 
 class DriveMM:
-  def __init__(self, angle=0, speed=0, distance=0, rate=500, brake=True):
+  def __init__(self, angle=0, speed=200, distance=0, rate=500, brake=True):
     self.angle = angle
     self.speed = speed
     self.distance_mm = distance
@@ -22,7 +22,7 @@ class DriveMM:
     robot.drive_mm(self.angle, self.speed, self.distance_mm, self.rate, self.brake)
 
 class Pivot:
-  def __init__(self, angle, speed, wait=75):
+  def __init__(self, angle=0, speed=100, wait=75):
     self.angle = angle
     self.speed = speed
     self.wait = wait
@@ -45,7 +45,7 @@ class LineSquare:
     robot.black_line_square(self.target, self.targetBlack, self.targetWhite, self.approachSpeed, self.finetuneSpeed, self.returnTime)
 
 class DriveMotor:
-  def __init__(self, motor, angle, speed, wait=True):
+  def __init__(self, motor="left", angle=0, speed=200, wait=True):
     self.motor = motor
     self.angle = angle
     self.speed = speed
@@ -58,7 +58,7 @@ class DriveMotor:
       robot.right_motor.run_angle(self.speed, self.angle, self.wait)
 
 class ActMotorAngle:
-  def __init__(self, motor, angle, speed, wait=True):
+  def __init__(self, motor="left", angle=0, speed=200, wait=True):
     self.motor = motor
     self.angle = angle
     self.speed = speed
@@ -68,7 +68,7 @@ class ActMotorAngle:
     robot.act_run_angle(self.motor, self.angle, self.speed, self.wait)
 
 class ActMotorTime:
-  def __init__(self, motor, time, speed, wait=True):
+  def __init__(self, motor="left", time=1000, speed=200, wait=True):
     self.motor = motor
     self.time = time
     self.speed = speed
@@ -78,7 +78,7 @@ class ActMotorTime:
     robot.act_run_time(self.motor, self.speed, self.time, self.wait)
 
 class Wait:
-  def __init__(self, time=0):
+  def __init__(self, time=1000):
     self.time = time
 
   def run(self, robot):
