@@ -52,10 +52,7 @@ class DriveMotor:
     self.wait = wait
 
   def run(self, robot):
-    if self.motor == "left":
-      robot.left_motor.run_angle(self.speed, self.angle, self.wait)
-    elif self.motor == "right":
-      robot.right_motor.run_angle(self.speed, self.angle, self.wait)
+    robot.drive_motor_angle(self.motor, self.speed, self.angle, self.wait)
 
 class ActMotorAngle:
   def __init__(self, motor="left", angle=0, speed=200, wait=True):
