@@ -5,26 +5,33 @@ def mo2():
     # Drive around M01
     Commands.GyroDrive(speed=200, distance=100),
     Commands.Pivot(angle=45, speed=100),
-    Commands.GyroDrive(speed=150, distance=260),
+    Commands.GyroDrive(speed=200, distance=280),
     Commands.DriveMotor(motor="right", angle=250, speed=150),
     # Drop arm for Sam
-    Commands.ActMotorTime(motor="left", time=500, speed=650),
+    Commands.ActMotorTime(motor="left", time=500, speed=-300, wait=False),
     # Drive to M02 & push
-    Commands.GyroDrive(speed=200, distance=180),
+    Commands.GyroDrive(speed=200, distance=170),
     Commands.DriveMotor(motor="right", angle=200, speed=150),
-    Commands.DriveMM(speed=100, distance=80),
+    Commands.DriveMM(speed=100, distance=40),
     # Capture Sam
-    Commands.ActMotorTime(motor="left", time=500, speed=-600),
+    Commands.ActMotorTime(motor="left", time=800, speed=350, wait=False),
     Commands.DriveMM(speed=100, distance=-80),
     # Deliver Izzy
     Commands.ActMotorAngle(motor="right", speed=400, angle=340),
     Commands.Wait(time=600),
     Commands.ActMotorAngle(motor="right", speed=400, angle=-340),
     # Pivot towards M01
-    Commands.Pivot(angle=-90, speed=100)
+    Commands.Pivot(angle=-90, speed=100),
+    # Manuver around M10
+    Commands.DriveMM(speed=100, distance=-80),
+    Commands.DriveMotor(motor="right", angle=230, speed=-150),
+    # Drive to M11
+    Commands.DriveMM(speed=150, distance=-350),
+    Commands.DriveMotor(speed=-100, angle=55, motor="left"),
+    # Complete M03 & M11
+    Commands.ActMotorTime(motor="right", speed=600, time=900, wait=False),
+    Commands.ActMotorTime(motor="left", speed=600, time=1500)
 
     ## NOTE ##
-    # Need to add code to drive back to M03 and complete M03 & M11.
-    # Also need to fine-tune code for picking up Sam,
-    # as well as rebuilding the arm that picks up Sam.
+    # Need to add code to drive home.
   ]
