@@ -10,7 +10,7 @@ def mo8():
   # Lower arm
   Commands.ActMotorTime(motor='right', speed=999, time=455, wait=False),
   # Drive to & Push M08
-  Commands.GyroDrive(speed=200, distance=360),
+  Commands.GyroDrive(speed=200, distance=340),
   # Back up & aim for pablo
   Commands.DriveMM(speed=200, distance=-190),
   Commands.Pivot(angle=50, speed=150),
