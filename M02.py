@@ -30,8 +30,12 @@ def mo2():
     Commands.DriveMotor(speed=-100, angle=55, motor="left"),
     # Complete M03 & M11
     Commands.ActMotorTime(motor="right", speed=600, time=900, wait=False),
-    Commands.ActMotorTime(motor="left", speed=600, time=1500)
-
-    ## NOTE ##
-    # Need to add code to drive home.
+    Commands.ActMotorTime(motor="left", speed=600, time=2500),
+    Commands.ActMotorTime(motor="right", speed=-600, time=900, wait=False),
+    # Pivot & Drive between M10 & M11
+    Commands.Pivot(angle=-70, speed=100),
+    Commands.GyroDrive(speed=250, distance=400),
+    # Face & Return to home
+    Commands.Pivot(speed=150, angle=90, wait=0),
+    Commands.GyroDrive(speed=250, distance=600)
   ]
