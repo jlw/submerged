@@ -1,6 +1,6 @@
 import Commands
 
-def mo9():
+def m10():
   return [
     # Commands.GyroDrive(speed=150, distance=390),
     # Commands.ActMotorTime(motor="left", speed=-400, time=500, wait=False),

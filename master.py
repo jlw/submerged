@@ -6,7 +6,7 @@ from pybricks.tools import wait
 
 from robot import Robot_Plus
 
-from M09 import mo9
+from M10 import m10
 from M08 import mo8
 from M06 import mo6
 from M02 import mo2
@@ -19,7 +19,7 @@ class Master_Main():
   def __init__(self):
     self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
-    self.missions = [["M06", mo6()], ["M08", mo8()], ["M14", m14()], ["M02", mo2()], ["M09", mo9()]]
+    self.missions = [["M06", mo6()], ["M08", mo8()], ["M14", m14()], ["M02", mo2()], ["M10", m10()]]
     self.wait_for_mission_end = True
     self.has_aborted = False
     self.count = 0
