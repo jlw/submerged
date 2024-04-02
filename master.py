@@ -23,8 +23,9 @@ class Master_Main():
     self.wait_for_mission_end = True
     self.has_aborted = False
     self.count = 0
-    self.display_font = Font('lucidia console', size=32, monospace=True)
-    self.ev3.screen.set_font(self.display_font)
+    self.mission_font = Font('lucidia console', size=32, monospace=True)
+    self.init_font = Font('lucidia console', size=24, monospace=True)
+    self.ev3.screen.set_font(self.init_font)
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
@@ -37,7 +38,6 @@ class Master_Main():
     commands = run[1]
     for command in commands:
       if self.has_aborted:
-        print("Mission has been aborted.")
         self.ev3.speaker.beep()
         self.has_aborted = False
         break
@@ -58,6 +58,7 @@ class Master_Main():
       if buttons == [Button.DOWN]:
         self.has_aborted = True
         self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
+    print("Mission has been aborted.")
     #self.robot.reset_motors(1)
 
   def module(self):
@@ -74,17 +75,20 @@ class Master_Main():
           run_num += 1
           if run_num >= len(self.missions):
             run_num = 0
+          print("playing", run_num)
       elif buttons == [Button.RIGHT]:
         # Move to next module
         if run_num >= len(self.missions) - 1:
           run_num = 0
         else:
           run_num += 1
+        print("moved right", run_num)
       elif buttons == [Button.LEFT]:
         # Move to last module
         run_num -= 1
         if run_num <= -1:
           run_num = len(self.missions) - 1
+        print("moved left", run_num)
 
       self.display(run_num)
     
@@ -108,16 +112,16 @@ class Master_Main():
       print("Error is", error,". . ", "Looped", self.count, "times.")
       wait(500)
     
-    if drift:
-      self.ev3.screen.draw_text(55, 80, "Drifting.")
-      self.ev3.screen.clear()
-      self.display(0)
-      wait(2000)
-    elif drift == False:
-      self.ev3.screen.draw_text(55, 80, "No Drift.")
-      self.ev3.screen.clear()
-      self.display(0)
-      wait(2000)
+    # if drift:
+    #   self.ev3.screen.draw_text(55, 80, "Drifting.")
+    #   self.ev3.screen.clear()
+    #   self.display(0)
+    #   wait(2000)
+    # elif drift == False:
+    #   self.ev3.screen.draw_text(55, 80, "No Drift.")
+    #   self.ev3.screen.clear()
+    #   self.display(0)
+    #   wait(2000)
 
   def start(self):
     cal_g = threading.Thread(target=self.calibrate_gyro)
@@ -143,11 +147,12 @@ class Master_Main():
       wait(200)
 
     self.ev3.screen.clear()
-    self.ev3.screen.draw_text(60, 60, "Ready!")
+    self.ev3.screen.draw_text(50, 50, "Ready!")
     self.ev3.speaker.beep(duration=200)
     wait(1000)
 
     self.robot.calibrate_color()
     
+    self.ev3.screen.set_font(self.mission_font)
     self.display(0)
     self.module()
