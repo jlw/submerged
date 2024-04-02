@@ -1,6 +1,6 @@
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (ColorSensor, GyroSensor)
-from pybricks.media.ev3dev import SoundFile
+from pybricks.media.ev3dev import SoundFile, Image, Font
 from pybricks.parameters import Button
 from pybricks.tools import wait
 
@@ -23,11 +23,13 @@ class Master_Main():
     self.wait_for_mission_end = True
     self.has_aborted = False
     self.count = 0
+    self.display_font = Font('lucidia console', size=32, monospace=True)
+    self.ev3.screen.set_font(self.display_font)
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
     self.ev3.screen.clear()
-    self.ev3.screen.draw_text(10, 10, current_mission[0])
+    self.ev3.screen.draw_text(50, 50, current_mission[0])
     wait(500)
 
   def play(self, run_number):
