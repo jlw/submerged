@@ -4,7 +4,7 @@ def mo6():
   return [
     # Drive to & Complete M01
     Commands.ActMotorTime(motor="right", speed=500, time=500, wait=False),
-    Commands.GyroDrive(speed=150, distance=300),
+    Commands.GyroDrive(speed=150, distance=360),
     Commands.ActMotorTime(motor="right", speed=-400, time=700, wait=False),
     Commands.Wait(time=300),
     Commands.Pivot(angle=10, speed=20),
