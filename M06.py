@@ -14,9 +14,9 @@ def mo6():
     Commands.Pivot(angle=60, speed=100),
     Commands.GyroDrive(speed=150, distance=250),
     Commands.Pivot(angle=-60, speed=100),
-    Commands.GyroDrive(speed=150, distance=420),
+    Commands.GyroDrive(speed=150, distance=410),
     # Pivot right and drive to M04
-    Commands.Pivot(angle=80, speed=100),
+    Commands.Pivot(angle=85, speed=100),
     Commands.GyroDrive(speed=200, distance=600),
     Commands.Wait(100),
     # Sneak onto Museum
