@@ -5,7 +5,7 @@ def mo8():
   # Reset Arm for Izzy
   # Drive Forward and Pivot to face M08
   Commands.DriveMM(speed=150, distance=25),
-  Commands.Pivot(angle=-95, speed=80),
+  Commands.Pivot(angle=-93, speed=80),
   # Drive to & Push M08
   Commands.GyroDrive(speed=200, distance=340),
   # Back up & aim for pablo
