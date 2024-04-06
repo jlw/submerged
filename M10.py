@@ -21,4 +21,5 @@ def m10():
   Commands.GyroDrive(speed=200, distance=420),
   Commands.ActMotorTime(motor="right", speed=400, time=900, wait=False),
   Commands.ActMotorTime(motor="left", speed=500, time=900, wait=True),
+  Commands.GyroDrive(speed=-150, distance=150)
   ]
