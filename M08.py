@@ -18,6 +18,7 @@ def mo8():
   Commands.ActMotorTime(motor='right', speed=-250, time=600),
   # Align for overspun poultry
   Commands.DriveMM(speed=150, distance=20),
+  # Prepare for flying feathers
   Commands.ActMotorTime(motor='left', speed=200, time=250),
   # Progressively make pablo more dizzy
   Commands.ActMotorTime(motor='left', speed=-999, time=3500),
