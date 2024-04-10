@@ -14,6 +14,7 @@ from M14 import m14
 
 import threading
 import _thread
+import math
 
 class Master_Main():
   def __init__(self):
@@ -26,6 +27,14 @@ class Master_Main():
     self.mission_font = Font('lucidia console', size=32, monospace=True)
     self.init_font = Font('lucidia console', size=24, monospace=True)
     self.ev3.screen.set_font(self.init_font)
+
+    init_1 = Image("IMAGES/init-1")
+    init_2 = Image("IMAGES/init-2")
+    init_3 = Image("IMAGES/init-3")
+    init_4 = Image("IMAGES/init-4")
+    init_5 = Image("IMAGES/init-5")
+    init_6 = Image("IMAGES/init-6")
+    self.images = [init_1, init_2, init_3, init_4, init_5, init_6]
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
@@ -110,7 +119,7 @@ class Master_Main():
       error = (self.robot.gyro_sensor.angle())
       self.count += 1
       print("Error is", error,". . ", "Looped", self.count, "times.")
-      wait(500)
+      wait(1000)
     
     # if drift:
     #   self.ev3.screen.draw_text(55, 80, "Drifting.")
@@ -128,23 +137,12 @@ class Master_Main():
     cal_g.start()
 
     while self.count < 10:
-      #calibrate gyro & color sensors at same time
-      
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_text(10, 10, "Initializing ")
-      wait(200)
+      # Calibrate gyro & color sensors at same time
 
+      num = math.floor((6 * self.count) / 10)
       self.ev3.screen.clear()
-      self.ev3.screen.draw_text(10, 10, "Initializing .")
-      wait(200)
-
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_text(10, 10, "Initializing . .")
-      wait(200)
-
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_text(10, 10, "Initializing . . .")
-      wait(200)
+      self.ev3.screen.draw_image(10, 10, self.images[num])
+      wait(900)
 
     self.ev3.screen.clear()
     self.ev3.screen.draw_text(50, 50, "Ready!")
