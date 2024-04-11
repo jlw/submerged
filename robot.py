@@ -4,6 +4,7 @@ from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch
 from pybricks.robotics import DriveBase
 from pybricks.nxtdevices import LightSensor
+from pybrick.media import Image
 
 from pid import PIDController
 import math
@@ -72,20 +73,25 @@ class Generic_Robot:
 
   ### CALIBRATE COLOR ###
   def calibrate_color(self):
-    self.ev3.screen.draw_text(10, 10, "Align Sensors on")
-    self.ev3.screen.draw_text(10, 40, "White")
     while self.ev3.buttons.pressed() != [Button.CENTER]:
-      wait(50)
+      self.ev3.screen.clear()
+      self.ev3.screen.draw_image("IMAGES/white-lq-1")
+      wait(500)
+      self.ev3.screen.clear()
+      self.ev3.screen.draw_image("IMAGES/white-lq-2")
+      wait(500)
     left_white = self.sen1.reflection()
     right_white = self.sen2.reflection()
 
     wait(500)
 
-    self.ev3.screen.clear()
-    self.ev3.screen.draw_text(10, 10, "Align Sensors on")
-    self.ev3.screen.draw_text(10, 40, "Black")
     while self.ev3.buttons.pressed() != [Button.CENTER]:
-      wait(50)
+      self.ev3.screen.clear()
+      self.ev3.screen.draw_image("IMAGES/black-lq-1")
+      wait(500)
+      self.ev3.screen.clear()
+      self.ev3.screen.draw_image("IMAGES/black-lq-2")
+      wait(500)
     self.left_color_black = self.sen1.reflection()
     self.right_color_black = self.sen2.reflection()
 
