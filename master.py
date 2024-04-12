@@ -133,7 +133,7 @@ class Master_Main():
     while self.count < 10:
       # Calibrate gyro & color sensors
       num = math.floor((6 * self.count) / 10)
-      self.ev3.screen.draw_image(10, 10, self.init_images[num])
+      self.ev3.screen.draw_image(0, 0, self.init_images[num])
       wait(900)
 
       # Check for skip
@@ -143,12 +143,12 @@ class Master_Main():
     self.robot.calibrate_color()
 
     for x in range(0, 3):
-      self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
+      self.ev3.screen.draw_image(0, 0, "IMAGES/ready-1")
       self.ev3.speaker.beep(frequency=440)
       wait(200)
-      self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
+      self.ev3.screen.draw_image(0, 0, "IMAGES/ready-2")
       wait(200)
-    self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
+    self.ev3.screen.draw_image(0, 0, "IMAGES/ready-1")
     wait(200)
     
     self.ev3.screen.set_font(self.mission_font)
