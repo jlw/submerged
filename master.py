@@ -109,7 +109,7 @@ class Master_Main():
     error = 0
     self.count = 0
     drift = False
-    while self.ev3.buttons.pressed() != [Button.CENTER]:
+    while self.ev3.buttons.pressed() != [Button.UP]:
       if error != 0:
         print("Gyro is drifing!")
         drift = True
@@ -131,10 +131,14 @@ class Master_Main():
 
     while self.count < 10:
       # Calibrate gyro & color sensors
-
       num = math.floor((6 * self.count) / 10)
       self.ev3.screen.draw_image(10, 10, self.init_images[num])
       wait(900)
+
+      # Check for skip
+      if self.ev3.buttons.pressed() == [Button.UP]:
+        break
+
     #self.ev3.speaker.beep(duration=200)
     for x in range(0, 3):
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
