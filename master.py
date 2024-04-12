@@ -85,9 +85,9 @@ class Master_Main():
         self.robot.gyro_sensor.reset_angle(0)
         self.play_mission(tuple([run_num]))
         # Auto Advance
-        run_num += 1
-        if run_num >= len(self.missions):
-          run_num = 0
+        # run_num += 1
+        # if run_num >= len(self.missions):
+        #   run_num = 0
       elif buttons == [Button.RIGHT]:
         # Draw Buttons
         button = "IMAGES/buttons/buttons-pressed-right"
