@@ -73,25 +73,29 @@ class Generic_Robot:
 
   ### CALIBRATE COLOR ###
   def calibrate_color(self):
-    while self.ev3.buttons.pressed() != [Button.CENTER]:
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_image(0, 0, "IMAGES/white-lq-1")
-      wait(500)
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_image(0, 0, "IMAGES/white-lq-2")
-      wait(500)
+    count = 0
+    while self.ev3.buttons.pressed() != [Button.CENTER] and self.ev3.buttons.pressed() != [Button.UP]:
+      if count % 1050 == 0:
+        self.ev3.screen.draw_image(0, 0, "IMAGES/white-lq-1")
+      if count % 3050 == 0:
+        self.ev3.screen.draw_image(0, 0, "IMAGES/white-lq-2")
+      count += 1
+      if count == 3050:
+        count = 0
     left_white = self.sen1.reflection()
     right_white = self.sen2.reflection()
 
     wait(500)
 
-    while self.ev3.buttons.pressed() != [Button.CENTER]:
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_image(0, 0, "IMAGES/black-lq-1")
-      wait(500)
-      self.ev3.screen.clear()
-      self.ev3.screen.draw_image(0, 0, "IMAGES/black-lq-2")
-      wait(500)
+    count = 0
+    while self.ev3.buttons.pressed() != [Button.CENTER] and self.ev3.buttons.pressed() != [Button.UP]:
+      if count % 1050 == 0:
+        self.ev3.screen.draw_image(0, 0, "IMAGES/black-lq-1")
+      if count % 3050 == 0:
+        self.ev3.screen.draw_image(0, 0, "IMAGES/black-lq-2")
+      count += 1
+      if count == 3050:
+        count = 0
     self.left_color_black = self.sen1.reflection()
     self.right_color_black = self.sen2.reflection()
 

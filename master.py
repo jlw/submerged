@@ -140,7 +140,8 @@ class Master_Main():
       if self.ev3.buttons.pressed() == [Button.UP]:
         break
 
-    #self.ev3.speaker.beep(duration=200)
+    self.robot.calibrate_color()
+
     for x in range(0, 3):
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
       self.ev3.speaker.beep(frequency=440)
@@ -149,8 +150,6 @@ class Master_Main():
       wait(200)
     self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
     wait(200)
-
-    self.robot.calibrate_color()
     
     self.ev3.screen.set_font(self.mission_font)
     self.display(0, "IMAGES/buttons/buttons-empty")
