@@ -31,9 +31,16 @@ class Generic_Robot:
       self.robot.settings(speed, rate)
       self.robot.straight(mm)
     else:
-      self.robot.drive(speed, angle)
-      while self.robot.distance() < mm:
-        wait(0)
+      # Check for Backwards & adjust accordingly
+      if mm < 0:
+        speed = 0 - speed
+        self.robot.drive(speed, angle)
+        while self.robot.distance() > mm:
+          wait(0)
+      else:
+        self.robot.drive(speed, angle)
+        while self.robot.distance() < mm:
+          wait(0)
     self.robot.stop()
     self.lm.brake()
     self.rm.brake()
@@ -64,9 +71,22 @@ class Generic_Robot:
     self.robot.reset()
     if reset_sensor == True:
       self.gyro.reset_angle(0)
-    pid_controller = PIDController(gainP, gainI, gainD)
-    while self.robot.distance() < distance_mm:
-      self.robot.drive(speed, pid_controller.adjust(angle - self.gyro.angle()))
+    
+    # Check & Adjust for Backwards
+    if distance_mm < 0:
+      gainP = 0 - gainP
+      gainI = 0 - gainI
+      gainD = 0 - gainD
+      speed = 0 - speed
+
+      pid_controller = PIDController(gainP, gainI, gainD)
+      while self.robot.distance() > distance_mm:
+        self.robot.drive(speed, pid_controller.adjust(angle - self.gyro.angle()))
+    else:
+      pid_controller = PIDController(gainP, gainI, gainD)
+      while self.robot.distance() < distance_mm:
+        self.robot.drive(speed, pid_controller.adjust(angle - self.gyro.angle()))
+
     self.robot.stop()
     self.lm.brake()
     self.rm.brake()

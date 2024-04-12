@@ -21,7 +21,7 @@ class Master_Main():
     self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
     self.missions = [["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"], ["M14", m14(), "IMAGES/missions/M14"], ["M02", mo2(), "IMAGES/missions/M02"], ["M10", m10(), "IMAGES/missions/M10"]]
-    self.end_mission = False
+    self.mission_is_running = False
     self.count = 0
     self.mission_font = Font('lucidia console', size=32, monospace=True)
     self.init_font = Font('lucidia console', size=24, monospace=True)
@@ -44,25 +44,22 @@ class Master_Main():
     run = self.missions[run_number]
     commands = run[1]
     for command in commands:
-      if self.end_mission:
+      if self.mission_is_running == False:
         self.ev3.speaker.beep(frequency=800)
         break
       command.run(self.robot)
     commands = []
-    self.end_mission = True
+    self.mission_is_running = False
 
   def play_mission(self, run_number):
-    self.end_mission = False
+    self.mission_is_running = True
     _thread.start_new_thread(self.play, (run_number))
 
     self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort")
 
-    while self.end_mission == False:
-      while self.ev3.buttons.pressed() == []:
-        wait(50)
-      buttons = self.ev3.buttons.pressed()
-      if buttons == [Button.DOWN]:
-        self.end_mission = True
+    while self.mission_is_running:
+      if  self.ev3.buttons.pressed() == [Button.DOWN]:
+        self.mission_is_running = False
         self.ev3.speaker.beep(frequency=800)
         self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort-pressed")
     
@@ -84,9 +81,9 @@ class Master_Main():
         self.robot.gyro_sensor.reset_angle(0)
         self.play_mission(tuple([run_num]))
         # Auto Advance
-        # run_num += 1
-        # if run_num >= len(self.missions):
-        #   run_num = 0
+        run_num += 1
+        if run_num >= len(self.missions):
+          run_num = 0
       elif buttons == [Button.RIGHT]:
         # Draw Buttons
         button = "IMAGES/buttons/buttons-pressed-right"
@@ -141,7 +138,7 @@ class Master_Main():
 
     self.robot.calibrate_color()
 
-    for x in range(0, 3):
+    for x in range(0, 2):
       self.ev3.screen.draw_image(0, 0, "IMAGES/ready-1")
       self.ev3.speaker.beep(frequency=440)
       wait(200)
