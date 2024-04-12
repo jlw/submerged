@@ -39,7 +39,6 @@ class Master_Main():
     current_mission = self.missions[run_num]
     self.ev3.screen.draw_image(0, 0, current_mission[2])
     self.draw_button(button)
-    wait(300)
 
   def play(self, run_number):
     run = self.missions[run_number]

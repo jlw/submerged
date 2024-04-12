@@ -37,13 +37,13 @@ def mo2():
     # Pivot & Drive between M10 & M11
     Commands.Pivot(angle=45, speed=100),
     Commands.DriveMM(speed=250, distance=-100),
-    Commands.ActMotorTime(motor="left", speed=500, time=5000),
+    Commands.ActMotorTime(motor="left", speed=500, time=4800),
     # Face & Return to home
     Commands.DriveMM(speed=200, distance=50),
     Commands.Pivot(angle=-100, speed=100),
-    Commands.DriveMM(speed=250, distance=600),
-    Commands.Pivot(angle=50, speed=100),
-    Commands.DriveMM(speed=250, distance=500),
+    Commands.DriveMM(speed=250, distance=1000, angle=14),
+    #Commands.Pivot(angle=50, speed=250),
+    #Commands.DriveMM(speed=250, distance=500),
 
   ]
     
