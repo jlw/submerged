@@ -50,6 +50,7 @@ class Master_Main():
         break
       command.run(self.robot)
     commands = []
+    self.end_mission = True
 
   def play_mission(self, run_number):
     self.end_mission = False
