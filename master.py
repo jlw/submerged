@@ -126,11 +126,11 @@ class Master_Main():
       self.ev3.screen.clear()
       self.ev3.screen.draw_image(10, 10, self.init_images[num])
       wait(900)
-    self.ev3.speaker.beep(duration=200)
+    #self.ev3.speaker.beep(duration=200)
     for x in range(0, 3):
       self.ev3.screen.clear()
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
-      wait(200)
+      self.ev3.speaker.beep(frequency=440, duration=200)
       self.ev3.screen.clear()
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
       wait(200)
