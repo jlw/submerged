@@ -141,7 +141,7 @@ class Master_Main():
 
     self.robot.calibrate_color()
 
-    for x in range(0, 3):
+    for x in range(0, 2):
       self.ev3.screen.draw_image(0, 0, "IMAGES/ready-1")
       self.ev3.speaker.beep(frequency=440)
       wait(200)
