@@ -28,13 +28,7 @@ class Master_Main():
     self.init_font = Font('lucidia console', size=24, monospace=True)
     self.ev3.screen.set_font(self.init_font)
 
-    init_1 = Image("IMAGES/init-1")
-    init_2 = Image("IMAGES/init-2")
-    init_3 = Image("IMAGES/init-3")
-    init_4 = Image("IMAGES/init-4")
-    init_5 = Image("IMAGES/init-5")
-    init_6 = Image("IMAGES/init-6")
-    self.images = [init_1, init_2, init_3, init_4, init_5, init_6]
+    self.init_images = ["IMAGES/init-1", "IMAGES/init-2", "IMAGES/init-3", "IMAGES/init-4", "IMAGES/init-5", "IMAGES/init-6"]
 
   def display(self, run_num):
     current_mission = self.missions[run_num]
@@ -120,43 +114,26 @@ class Master_Main():
       self.count += 1
       print("Error is", error,". . ", "Looped", self.count, "times.")
       wait(1000)
-    
-    # if drift:
-    #   self.ev3.screen.draw_text(55, 80, "Drifting.")
-    #   self.ev3.screen.clear()
-    #   self.display(0)
-    #   wait(2000)
-    # elif drift == False:
-    #   self.ev3.screen.draw_text(55, 80, "No Drift.")
-    #   self.ev3.screen.clear()
-    #   self.display(0)
-    #   wait(2000)
 
   def start(self):
     cal_g = threading.Thread(target=self.calibrate_gyro)
     cal_g.start()
 
     while self.count < 10:
-      # Calibrate gyro & color sensors at same time
+      # Calibrate gyro & color sensors
 
       num = math.floor((6 * self.count) / 10)
       self.ev3.screen.clear()
-      self.ev3.screen.draw_image(10, 10, self.images[num])
+      self.ev3.screen.draw_image(10, 10, self.init_images[num])
       wait(900)
-
     self.ev3.speaker.beep(duration=200)
-    self.ev3.screen.clear()
-    self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
-    wait(200)
-    self.ev3.screen.clear()
-    self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
-    wait(200)
-    self.ev3.screen.clear()
-    self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
-    wait(200)
-    self.ev3.screen.clear()
-    self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
-    wait(200)
+    for x in range(0, 3):
+      self.ev3.screen.clear()
+      self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
+      wait(200)
+      self.ev3.screen.clear()
+      self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
+      wait(200)
     self.ev3.screen.clear()
     self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
     wait(200)
