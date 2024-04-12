@@ -21,8 +21,6 @@ class Master_Main():
     self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
     self.missions = [["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"], ["M14", m14(), "IMAGES/missions/M14"], ["M02", mo2(), "IMAGES/missions/M02"], ["M10", m10(), "IMAGES/missions/M10"]]
-    self.wait_for_mission_end = True
-    self.has_aborted = False
     self.end_mission = False
     self.count = 0
     self.mission_font = Font('lucidia console', size=32, monospace=True)
@@ -53,8 +51,6 @@ class Master_Main():
       command.run(self.robot)
     commands = []
 
-    print(run[0])
-
   def play_mission(self, run_number):
     self.end_mission = False
     _thread.start_new_thread(self.play, (run_number))
@@ -69,7 +65,8 @@ class Master_Main():
         self.end_mission = True
         self.ev3.speaker.beep(frequency=800)
         self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort-pressed")
-    #self.robot.reset_motors(1)
+    
+    wait(500)
 
   def module(self):
     run_num = 0
@@ -141,7 +138,8 @@ class Master_Main():
     #self.ev3.speaker.beep(duration=200)
     for x in range(0, 3):
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
-      self.ev3.speaker.beep(frequency=440, duration=200)
+      self.ev3.speaker.beep(frequency=440)
+      wait(200)
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
       wait(200)
     self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
@@ -150,5 +148,5 @@ class Master_Main():
     self.robot.calibrate_color()
     
     self.ev3.screen.set_font(self.mission_font)
-    self.display(0)
+    self.display(0, "IMAGES/buttons/buttons-empty")
     self.module()
