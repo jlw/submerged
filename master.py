@@ -20,7 +20,7 @@ class Master_Main():
   def __init__(self):
     self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
-    self.missions = [["M06", mo6()], ["M08", mo8()], ["M14", m14()], ["M02", mo2()], ["M10", m10()]]
+    self.missions = [["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"], ["M14", m14(), "IMAGES/missions/M14"], ["M02", mo2(), "IMAGES/missions/M02"], ["M10", m10(), "IMAGES/missions/M10"]]
     self.wait_for_mission_end = True
     self.has_aborted = False
     self.count = 0
@@ -28,13 +28,19 @@ class Master_Main():
     self.init_font = Font('lucidia console', size=24, monospace=True)
     self.ev3.screen.set_font(self.init_font)
 
+    self.button_height = 93
     self.init_images = ["IMAGES/init-1", "IMAGES/init-2", "IMAGES/init-3", "IMAGES/init-4", "IMAGES/init-5", "IMAGES/init-6"]
 
-  def display(self, run_num):
+  def draw_button(self, pressed_button_image):
+    self.ev3.screen.draw_image(0, self.button_height, pressed_button_image)
+    wait(200)
+    self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-empty")
+
+  def display(self, run_num, button):
     current_mission = self.missions[run_num]
-    self.ev3.screen.clear()
-    self.ev3.screen.draw_text(50, 50, current_mission[0])
-    wait(500)
+    self.ev3.screen.draw_image(0, 0, current_mission[2])
+    self.draw_button(button)
+    wait(300)
 
   def play(self, run_number):
     run = self.missions[run_number]
@@ -54,6 +60,8 @@ class Master_Main():
     self.wait_for_mission_end = True
     _thread.start_new_thread(self.play, (run_number))
 
+    self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort")
+
     while self.wait_for_mission_end:
       while self.ev3.buttons.pressed() == []:
         wait(50)
@@ -61,6 +69,7 @@ class Master_Main():
       if buttons == [Button.DOWN]:
         self.has_aborted = True
         self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
+        self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort-pressed")
     print("Mission has been aborted.")
     #self.robot.reset_motors(1)
 
@@ -71,15 +80,22 @@ class Master_Main():
       while self.ev3.buttons.pressed() == []:
         wait(50)
       buttons = self.ev3.buttons.pressed()
+      button = "IMAGES/buttons/buttons-empty"
+
       if buttons == [Button.CENTER]:
-          # Play current module
-          self.robot.gyro_sensor.reset_angle(0)
-          self.play_mission(tuple([run_num]))
-          run_num += 1
-          if run_num >= len(self.missions):
-            run_num = 0
-          print("playing", run_num)
+        # Draw Buttons
+        self.draw_button("IMAGES/buttons/buttons-pressed-center")
+        # Play current module
+        self.robot.gyro_sensor.reset_angle(0)
+        self.play_mission(tuple([run_num]))
+        # Auto Advance
+        run_num += 1
+        if run_num >= len(self.missions):
+          run_num = 0
+        print("playing", run_num)
       elif buttons == [Button.RIGHT]:
+        # Draw Buttons
+        button = "IMAGES/buttons/buttons-pressed-right"
         # Move to next module
         if run_num >= len(self.missions) - 1:
           run_num = 0
@@ -87,13 +103,15 @@ class Master_Main():
           run_num += 1
         print("moved right", run_num)
       elif buttons == [Button.LEFT]:
+        # Draw Buttons
+        button = "IMAGES/buttons/buttons-pressed-left"
         # Move to last module
         run_num -= 1
         if run_num <= -1:
           run_num = len(self.missions) - 1
         print("moved left", run_num)
 
-      self.display(run_num)
+      self.display(run_num, button)
     
   def calibrate_gyro(self):
     error = 0
@@ -123,18 +141,14 @@ class Master_Main():
       # Calibrate gyro & color sensors
 
       num = math.floor((6 * self.count) / 10)
-      self.ev3.screen.clear()
       self.ev3.screen.draw_image(10, 10, self.init_images[num])
       wait(900)
     #self.ev3.speaker.beep(duration=200)
     for x in range(0, 3):
-      self.ev3.screen.clear()
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
       self.ev3.speaker.beep(frequency=440, duration=200)
-      self.ev3.screen.clear()
       self.ev3.screen.draw_image(10, 10, "IMAGES/ready-2")
       wait(200)
-    self.ev3.screen.clear()
     self.ev3.screen.draw_image(10, 10, "IMAGES/ready-1")
     wait(200)
 
