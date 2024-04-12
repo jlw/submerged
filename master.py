@@ -23,6 +23,7 @@ class Master_Main():
     self.missions = [["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"], ["M14", m14(), "IMAGES/missions/M14"], ["M02", mo2(), "IMAGES/missions/M02"], ["M10", m10(), "IMAGES/missions/M10"]]
     self.wait_for_mission_end = True
     self.has_aborted = False
+    self.end_mission = False
     self.count = 0
     self.mission_font = Font('lucidia console', size=32, monospace=True)
     self.init_font = Font('lucidia console', size=24, monospace=True)
@@ -46,31 +47,28 @@ class Master_Main():
     run = self.missions[run_number]
     commands = run[1]
     for command in commands:
-      if self.has_aborted:
-        self.ev3.speaker.beep()
-        self.has_aborted = False
+      if self.end_mission:
+        self.ev3.speaker.beep(frequency=800)
         break
       command.run(self.robot)
     commands = []
 
     print(run[0])
-    self.wait_for_mission_end = False
 
   def play_mission(self, run_number):
-    self.wait_for_mission_end = True
+    self.end_mission = False
     _thread.start_new_thread(self.play, (run_number))
 
     self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort")
 
-    while self.wait_for_mission_end:
+    while self.end_mission == False:
       while self.ev3.buttons.pressed() == []:
         wait(50)
       buttons = self.ev3.buttons.pressed()
       if buttons == [Button.DOWN]:
-        self.has_aborted = True
-        self.ev3.speaker.play_file(SoundFile.GENERAL_ALERT)
+        self.end_mission = True
+        self.ev3.speaker.beep(frequency=800)
         self.ev3.screen.draw_image(0, self.button_height, "IMAGES/buttons/buttons-abort-pressed")
-    print("Mission has been aborted.")
     #self.robot.reset_motors(1)
 
   def module(self):
@@ -92,7 +90,6 @@ class Master_Main():
         run_num += 1
         if run_num >= len(self.missions):
           run_num = 0
-        print("playing", run_num)
       elif buttons == [Button.RIGHT]:
         # Draw Buttons
         button = "IMAGES/buttons/buttons-pressed-right"
@@ -101,7 +98,6 @@ class Master_Main():
           run_num = 0
         else:
           run_num += 1
-        print("moved right", run_num)
       elif buttons == [Button.LEFT]:
         # Draw Buttons
         button = "IMAGES/buttons/buttons-pressed-left"
@@ -109,7 +105,6 @@ class Master_Main():
         run_num -= 1
         if run_num <= -1:
           run_num = len(self.missions) - 1
-        print("moved left", run_num)
 
       self.display(run_num, button)
     
