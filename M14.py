@@ -13,13 +13,13 @@ def m14():
     Commands.DriveMM(speed=175, distance=190),
     Commands.ActMotorTime(motor='right', speed=-100, time=1000),
     # Push M08 camera & back up
-    Commands.DriveMM(speed=175, distance=185),
-    Commands.DriveMM(speed=175, distance=-50),
+    Commands.DriveMM(speed=175, distance=200),
+    Commands.DriveMM(speed=175, distance=-75),
     # Lift arm
     Commands.ActMotorTime(motor='left', speed=-100, time=1000),
     # Reset Motors
     Commands.ActMotorTime(motor='right', speed=100, time=1500, wait=False),
     Commands.ActMotorTime(motor='left', speed=-100, time=1500, wait=False),
     # Drive to home
-    Commands.GyroDrive(speed=250, distance=850)
+    Commands.GyroDrive(speed=250, distance=1000)
   ]
