@@ -27,5 +27,5 @@ def mo8():
   # Change course for safe house
   Commands.Pivot(speed=250, angle=-30),
   # Bunker down
-  Commands.DriveMM(speed=250, distance=-500),
+  Commands.DriveMM(speed=250, distance=-500)
 ]
