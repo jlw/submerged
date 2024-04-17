@@ -3,11 +3,11 @@ import Commands
 def m14():
   return [
     # Move off wall
-    Commands.DriveMM(speed=150, distance=185),
+    Commands.GyroDrive(speed=150, distance=185),
     # Align with M08
     Commands.Pivot(angle=-90, speed=100),
     # Drive and drop arm
-    Commands.GyroDrive(speed=175, distance=600),
+    Commands.GyroDrive(angle=-90, speed=175, distance=600, reset_sensor=False),
     Commands.ActMotorTime(motor='left', speed=100, time=1000),
     # Release audience member
     Commands.DriveMM(speed=175, distance=190),
