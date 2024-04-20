@@ -5,19 +5,19 @@ def mo6():
     # Drive to & Complete M01
     Commands.ActMotorTime(motor="right", speed=500, time=500, wait=False),
     Commands.GyroDrive(speed=150, distance=300),
-    Commands.ActMotorTime(motor="right", speed=-400, time=700, wait=False),
+    Commands.ActMotorTime(motor="right", speed=-400, time=1000, wait=False),
     Commands.Wait(time=300),
     # Commands.Pivot(angle=10, speed=20),
     Commands.Wait(time=300),
     # Back up from M01, pivot & drive towards M02
     Commands.DriveMM(speed=150, distance=-200),
     Commands.Pivot(angle=60, speed=100),
-    Commands.GyroDrive(speed=150, distance=250),
+    Commands.GyroDrive(angle=60, speed=150, distance=250, reset_sensor=False),
     Commands.Pivot(angle=-50, speed=100),
-    Commands.GyroDrive(speed=150, distance=380),
+    Commands.GyroDrive(angle=10, speed=150, distance=380, reset_sensor=False),
     # Pivot right and drive to M04
     Commands.Pivot(angle=85, speed=100),
-    Commands.GyroDrive(speed=200, distance=570),
+    Commands.GyroDrive(angle=95, speed=200, distance=570, reset_sensor=False),
     Commands.Wait(100),
     # Sneak onto Museum
     Commands.Pivot(angle=-65, speed=100),
@@ -25,22 +25,23 @@ def mo6():
     Commands.Pivot(angle=60, speed=100),
     # Release M04 module
     Commands.ActMotorTime(motor="left", speed=-700, time=1000, wait=False),
-    Commands.ActMotorTime(motor="right", speed=700, time=600),
+    Commands.ActMotorTime(motor="right", speed=1000, time=600),
     # Complete M05
     Commands.DriveMM(speed=75, distance=50),
     Commands.Pivot(angle=45, speed=250),
     Commands.DriveMM(speed=75, distance=-30),
-    Commands.ActMotorTime(motor="right", speed=-700, time=450, wait=False),
+    Commands.ActMotorTime(motor="right", speed=-800, time=450, wait=False),
     Commands.DriveMM(speed=75, distance=30),
     # Drive to M06 & M07
-    Commands.GyroDrive(speed=150, distance=150),
+    Commands.GyroDrive(speed=150, distance=190),
     Commands.Pivot(angle=-45, speed=100),
     Commands.GyroDrive(speed=150, distance=420),
     Commands.Pivot(angle=-45, speed=100),
     # Complete M06 & M07
     Commands.ActMotorTime(motor="right", time=400, speed=-400, wait=False),
+    Commands.DriveMM(speed=175, distance=50),
     Commands.LineSquare(),
-    Commands.DriveMM(speed=100, distance=100),
+    Commands.DriveMM(speed=100, distance=120),
     Commands.ActMotorTime(motor="right", speed=1500, time=700),
     Commands.DriveMM(speed=100, distance=-10),
     Commands.Pivot(angle=10, speed=75),
