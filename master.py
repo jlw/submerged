@@ -8,7 +8,7 @@ from robot import Robot_Plus
 
 from M10 import m10
 from M08 import mo8
-from M06 import mo6
+from M05 import mo5
 from M02 import mo2
 from M14 import m14
 from M03_world import mo3
@@ -22,7 +22,7 @@ class Master_Main():
   def __init__(self):
     self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
-    self.missions = [["M02", mo2(), "IMAGES/missions/M02"], ["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"], ["M14", m14(), "IMAGES/missions/M14"], ["M10", m10(), "IMAGES/missions/M10"]]
+    self.missions = [["M05", mo5(), "IMAGES/missions/M06"], ["M02", mo2(), "IMAGES/missions/M02"]]
     self.mission_is_running = False
     self.count = 0
     self.mission_font = Font('lucidia console', size=32, monospace=True)
