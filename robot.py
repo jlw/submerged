@@ -215,7 +215,7 @@ class Robot_Plus(Generic_Robot):
     self.right_motor = Motor(Port.C, Direction.CLOCKWISE, gears=None)
     self.act_right = Motor(Port.D, Direction.CLOCKWISE, gears=None)
     self.act_left = Motor(Port.A, Direction.CLOCKWISE, gears=None)
-    self.drive_base = DriveBase(self.left_motor, self.right_motor, 57, 125)
+    self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 128)
     #self.infared = InfraredSensor(Port.S1)
     self.left_color = ColorSensor(Port.S3)
     self.right_color = ColorSensor(Port.S4)
