@@ -10,7 +10,7 @@ from pid import PIDController
 import math
 
 class Generic_Robot:
-  def __init__(self, EV3Brick, DriveBase, LeftMotor, RightMotor, LightSensorLeft, LightSensorRight, GyroSensor):
+  def __init__(self, EV3Brick, DriveBase, LeftMotor, RightMotor, LightSensorLeft, LightSensorRight, GyroSensor, WheelDiameter, WheelBase):
     self.ev3 = EV3Brick
     self.robot = DriveBase
     self.lm = LeftMotor
@@ -23,6 +23,8 @@ class Generic_Robot:
     self.right_color_percent = 0
     self.left_color_black = 0
     self.right_color_black = 0
+    self.wheel_diameter = WheelDiameter
+    self.wheel_base = WheelBase
 
   ### DRIVE MILIMETERS ###
   def drive_mm(self, angle, speed, mm, rate=500, brake=True):
@@ -59,8 +61,8 @@ class Generic_Robot:
       right_speed = speed
       target_angle = 0 - target_angle
 
-    wheel_circumference_mm = math.pi * 57.0
-    wheelbase_circumference_mm = math.pi * 125.0
+    wheel_circumference_mm = math.pi * self.wheel_diameter
+    wheelbase_circumference_mm = math.pi * self.wheel_base
     target_distance = (wheelbase_circumference_mm / 360.0) * target_angle
     motor_degrees = (360 / wheel_circumference_mm) * target_distance
 
@@ -209,18 +211,21 @@ class Robot_Plus(Generic_Robot):
     ### THIS MUST BE CONFIGURED TO THE ROBOT ###             
     ############################################
 
+    self.wheel_diameter = 62.4
+    self.wheel_base = 128.0
     self.name = name
     self.ev3 = EV3Brick()
     self.left_motor = Motor(Port.B, Direction.CLOCKWISE, gears=None)
     self.right_motor = Motor(Port.C, Direction.CLOCKWISE, gears=None)
     self.act_right = Motor(Port.D, Direction.CLOCKWISE, gears=None)
     self.act_left = Motor(Port.A, Direction.CLOCKWISE, gears=None)
-    self.drive_base = DriveBase(self.left_motor, self.right_motor, 62.4, 128)
+    self.drive_base = DriveBase(self.left_motor, self.right_motor, self.wheel_diameter, self.wheel_base)
     #self.infared = InfraredSensor(Port.S1)
     self.left_color = ColorSensor(Port.S3)
     self.right_color = ColorSensor(Port.S4)
     self.gyro_sensor = GyroSensor(Port.S2)
-    Generic_Robot.__init__(self, self.ev3, self.drive_base, self.left_motor, self.right_motor, self.left_color, self.right_color, self.gyro_sensor)
+
+    Generic_Robot.__init__(self, self.ev3, self.drive_base, self.left_motor, self.right_motor, self.left_color, self.right_color, self.gyro_sensor, self.wheel_diameter, self.wheel_base)
   
   def query(self):
     print(self.name)
