@@ -1,6 +1,6 @@
 import Commands
 
-def mo8():
+def mo9():
   return{
     Commands.GyroDrive(speed=300 distance=200)
     Commands.Pivot(angle=-45 speed=200)
