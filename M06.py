@@ -6,7 +6,7 @@ def mo6():
     #Drive to M06
     Commands.ActMotorTime(motor='right', speed=575, time=1500, wait=False),
     Commands.GyroDrive (speed=150, distance=500),
-    Commands.Pivot (angle=90, speed=150),
+    Commands.Pivot (angle=89, speed=100),
     Commands.GyroDrive (speed=150, distance=145),
     Commands.ActMotorTime (motor='right', speed=-150, time=1600),
     Commands.GyroDrive (speed=150, distance=-8),
@@ -16,6 +16,6 @@ def mo6():
     Commands.GyroDrive (speed=150, distance=-100),
     Commands.GyroDrive (speed=150, distance=10),
     #Return to home
-    Commands.Pivot (angle=110, speed=150),
+    Commands.Pivot (angle=120, speed=150),
     Commands.GyroDrive (speed=250, distance=475),
     ]
