@@ -15,7 +15,7 @@ def mo5():
     Commands.Pivot(angle=-30),
     
     
-    #Commands.LineSquare(targetBlack=80, targetWhite=13, target=20, approachSpeed=100, finetuneSpeed=50, returnTime=2000)
+    Commands.LineSquare(targetBlack=80, targetWhite=13, target=20, approachSpeed=100, finetuneSpeed=50, returnTime=4000)
     
     #Commands.GyroDrive(speed=150, distance=350),
   ]
