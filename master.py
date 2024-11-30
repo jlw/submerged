@@ -9,7 +9,6 @@ from robot import Robot_Plus
 from M02 import mo2
 from M05 import mo5
 from M06 import mo6
-from M08 import mo8
 from M14 import m14
 
 import threading
