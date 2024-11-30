@@ -142,7 +142,7 @@ class Generic_Robot:
         wait(0)
 
     def colorIsInRange(value):
-      if targetBlack < value and targetWhite > value:
+      if targetBlack > value and targetWhite < value:
         return True
       else:
         return False
@@ -185,14 +185,14 @@ class Generic_Robot:
       # Fine tunes the left motor
       if ref1 in targetFineTune:
         self.lm.hold()
-      elif ref1 < min(targetFineTune):
+      elif ref1 > max(targetFineTune):
         self.lm.run(reverseFinetuneSpeed)
       else:
         self.lm.run(finetuneSpeed)
       # Fine tunes the right motor
       if ref2 in targetFineTune:
         self.rm.hold()
-      elif ref2 < min(targetFineTune):
+      elif ref2 > max(targetFineTune):
         self.rm.run(reverseFinetuneSpeed)
       else:
         self.rm.run(finetuneSpeed)
