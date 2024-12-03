@@ -155,10 +155,10 @@ class Generic_Robot:
     self.stopWatch.resume()
     targetFineTune = range(40, 45)
     # Roughly lines up with the black line
-    self.robot.drive(0, approachSpeed)
+    self.robot.drive(approachSpeed, 0)
     while True:
-      ref1 = self.ajustReading(self.sen1.reflection(), "Left")
-      ref2 = self.ajustReading(self.sen2.reflection(), "Right")
+      ref1 = self.ajustReading(self.sen1.reflection(), "Right")
+      ref2 = self.ajustReading(self.sen2.reflection(), "Left")
 
       self.robot.drive(approachSpeed, 0)
 
