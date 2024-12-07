@@ -11,6 +11,7 @@ from M05 import mo5
 from M06 import mo6
 from M14 import m14
 from M08 import mo8
+from M03 import mo3
 
 import threading
 import _thread
@@ -20,7 +21,7 @@ class Master_Main():
   def __init__(self):
     self.robot = Robot_Plus()
     self.ev3 = EV3Brick()
-    self.missions = [["M05", mo5(), "IMAGES/missions/M05"], ["M02", mo2(), "IMAGES/missions/M02"], ["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"]]
+    self.missions = [["M05", mo5(), "IMAGES/missions/M05"], ["M02", mo2(), "IMAGES/missions/M02"], ["M06", mo6(), "IMAGES/missions/M06"], ["M08", mo8(), "IMAGES/missions/M08"],["M03", mo3(), "IMAGES/missions/M03"]]
     self.mission_is_running = False
     self.count = 0
     self.mission_font = Font('lucidia console', size=32, monospace=True)
