@@ -14,6 +14,6 @@ def mo2():
     Commands.GyroDrive (speed=175, distance=93),
     #return to home
     Commands.GyroDrive (speed=175, distance=-90),
-    Commands.Pivot (angle=-37, speed=125),
+    Commands.Pivot (angle=-37, speed=105),
     Commands.GyroDrive (speed=222, distance=750)
   ]

@@ -30,19 +30,19 @@ def mo5():
     # Scare it away
     Commands.Pivot(speed=100, angle=20),
     Commands.GyroDrive(speed=150, distance=10),
-    Commands.Pivot(speed=100, angle=30),
+    Commands.Pivot(speed=100, angle=50),
     # Run to the coral
-    Commands.ActMotorTime(motor='right', speed=600, time=1400, wait=False),
+    Commands.ActMotorTime(motor='right', speed=600, time=1500, wait=False),
     Commands.GyroDrive(speed=200, distance=280),
     # agressavly hit coral untill it revives it somehow
     Commands.ActMotorTime(motor='right', speed=500, time=1000),
     # Run away
-    Commands.ActMotorTime(motor='right', speed=-500, time=1750, wait=False),
+    Commands.ActMotorTime(motor='right', speed=-500, time=1850, wait=False),
     Commands.GyroDrive(speed=200, distance=-90),
     Commands.DriveMotor(motor="right", angle=185, speed=175),
     # Scoop up all nearby wildlife
     Commands.GyroDrive(speed=200, distance=300),
-    Commands.Pivot(angle=-55),
+    Commands.Pivot(angle=-40),
     # Return to saftey
     Commands.DriveMM(speed=222, distance=800),
 #   Commands.Fix_it (amount='everything')
