@@ -16,6 +16,7 @@ from M03 import m03
 import threading
 import _thread
 import math
+import sys #remove if broken
 
 class Master_Main():
   def __init__(self):
@@ -111,7 +112,7 @@ class Master_Main():
       if error != 0:
         print("Gyro is drifing!")
         drift = True
-        break
+        sys.exit() # was break
 
       if self.count >= 10:
         print("No drift here!")
