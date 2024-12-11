@@ -1,6 +1,6 @@
 import Commands
 
-def mo6():
+def m06():
   return [
 
     #Drive to M06

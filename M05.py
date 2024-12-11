@@ -1,6 +1,6 @@
 import Commands
 
-def mo5():
+def m05():
   return [
     # Lower the arm
     Commands.ActMotorTime(motor='right', speed=550, time=1850, wait=False),

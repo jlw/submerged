@@ -1,6 +1,6 @@
 import Commands
 
-def mo8():
+def m08():
   return [
     Commands.ActMotorTime(motor='right', speed=500, time=1800, wait=False),
     Commands.GyroDrive(speed=200, distance=610),

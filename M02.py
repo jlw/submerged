@@ -1,6 +1,6 @@
 import Commands
 
-def mo2():
+def m02():
   return [
     #drive to mission 2
     Commands.GyroDrive (speed=175, distance=720),
