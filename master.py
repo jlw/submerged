@@ -127,7 +127,7 @@ class Master_Main():
     cal_g = threading.Thread(target=self.calibrate_gyro)
     cal_g.start()
 
-    while self.count < 10:
+    while self.count < 3:
       # Calibrate gyro & color sensors
       num = math.floor((6 * self.count) / 10)
       self.ev3.screen.draw_image(0, 0, self.init_images[num])
