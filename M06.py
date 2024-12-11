@@ -14,13 +14,13 @@ def mo6():
     #Grab Treasure chest
     Commands.ActMotorTime (motor='right', speed=250, time=1555),
     Commands.GyroDrive (speed=150, distance=-100),
-    Commands.GyroDrive (speed=150, distance=10),
+    #Raise the mast
     Commands.ActMotorTime (motor='right', speed=-400, time=1300),
-    Commands.GyroDrive (speed=125, distance=120),
+    Commands.GyroDrive (speed=125, distance=130),
     Commands.ActMotorTime (motor='right', speed=300, time=1200, wait=False),
     Commands.GyroDrive (speed=90, distance=-90),
     Commands.Wait (time=900),
-    Commands.ActMotorTime (motor='right', speed=-300, time=300, wait=False),
+    Commands.ActMotorTime (motor='right', speed=-300, time=1300),
 
     #Return to home
     Commands.Pivot (angle=120, speed=150),
