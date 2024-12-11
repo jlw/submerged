@@ -19,22 +19,22 @@ def mo5():
     Commands.Pivot(angle=-60),
     Commands.GyroDrive(speed=175, distance=240),
     # Turn to square
-    Commands.Pivot(speed=80, angle=34),
-    Commands.GyroDrive(speed=150, distance=100),
+    Commands.Pivot(speed=80, angle=37),
+    Commands.GyroDrive(speed=150, distance=128),
     # LineSquare
     Commands.LineSquare(approachSpeed=100, finetuneSpeed=50, returnTime=4500),
-    Commands.GyroDrive(speed=80, distance=-12),
+    Commands.GyroDrive(speed=80, distance=-15),
     # Turn to angler fish
     Commands.Pivot(speed=80, angle=-73),
-    Commands.GyroDrive(speed=175, distance=246),
-    Commands.GyroDrive(speed=125, distance=-6),
+    Commands.GyroDrive(speed=175, distance=244),
+    Commands.GyroDrive(speed=125, distance=-10),
     # Scare it away
     Commands.Pivot(speed=100, angle=20),
     Commands.GyroDrive(speed=150, distance=10),
     Commands.Pivot(speed=100, angle=41),
     # Run to the coral
     Commands.ActMotorTime(motor='right', speed=600, time=1500, wait=False),
-    Commands.GyroDrive(speed=200, distance=280),
+    Commands.GyroDrive(speed=200, distance=300),
     # agressavly hit coral untill it revives it somehow
     Commands.ActMotorTime(motor='right', speed=500, time=1000),
     # Run away
