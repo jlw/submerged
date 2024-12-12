@@ -9,7 +9,6 @@ from robot import Robot_Plus
 from M02 import m02
 from M05 import m05
 from M06 import m06
-from M14 import m14
 from M08 import m08
 from M03 import m03
 from M09 import m09
@@ -113,7 +112,7 @@ class Master_Main():
       if error != 0:
         print("Gyro is drifing!")
         drift = True
-        sys.exit() # was break
+        break
 
       if self.count >= 3:
         print("No drift here!")
