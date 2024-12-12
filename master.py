@@ -12,6 +12,7 @@ from M06 import m06
 from M14 import m14
 from M08 import m08
 from M03 import m03
+from M09 import m09
 
 import threading
 import _thread
@@ -114,7 +115,7 @@ class Master_Main():
         drift = True
         sys.exit() # was break
 
-      if self.count >= 10:
+      if self.count >= 3:
         print("No drift here!")
         drift = False
         break
@@ -130,7 +131,7 @@ class Master_Main():
 
     while self.count < 3:
       # Calibrate gyro & color sensors
-      num = math.floor((6 * self.count) / 10)
+      num = self.count
       self.ev3.screen.draw_image(0, 0, self.init_images[num])
       wait(900)
 
