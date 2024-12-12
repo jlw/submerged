@@ -3,20 +3,25 @@ import Commands
 def m05():
   return [
     # Lower the arm
-    Commands.ActMotorTime(motor='right', speed=550, time=1850, wait=False),
-    Commands.GyroDrive(speed=200, distance=320),
-    Commands.Pivot(speed=80, angle=-65),
-    # Ram the Quatropus
-    Commands.GyroDrive(speed=175, distance=110),
-    Commands.GyroDrive(speed=175, distance=-15),
-    Commands.ActMotorTime(motor='right', speed=-300, time=3500, wait=False),
+    #Commands.ActMotorTime(motor='right', speed=550, time=1850, wait=False),
+    #Commands.GyroDrive(speed=200, distance=320),
+    #Commands.Pivot(speed=80, angle=-65),
+    ## Ram the Quatropus
+    #Commands.GyroDrive(speed=175, distance=110),
+    #Commands.GyroDrive(speed=175, distance=-15),
+    #Commands.ActMotorTime(motor='right', speed=-300, time=3500, wait=False),
+    
+    ### NEED TO AJUST FOR NO M09 ###
+
     # Turn to coral and collect
-    Commands.Pivot(speed=80, angle=73),
-    Commands.GyroDrive(speed=175, distance=125),
+    #Commands.Pivot(speed=80, angle=73),
+    #Commands.GyroDrive(speed=175, distance=125),
     # Drive to sub station
-    Commands.Pivot(angle=-27),
-    Commands.GyroDrive(speed=175, distance=148),
-    Commands.Pivot(angle=-60),
+    #Commands.Pivot(angle=-27),
+
+
+    Commands.GyroDrive(speed=175, distance=590),
+    Commands.Pivot(angle=-78),
     Commands.GyroDrive(speed=175, distance=240),
     # Turn to square
     Commands.Pivot(speed=80, angle=37),
