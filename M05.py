@@ -4,13 +4,13 @@ def m05():
   return [
     Commands.GyroDrive(speed=200, distance=403),
     Commands.Pivot(angle=-48.5),
-    Commands.GyroDrive(speed=175, distance=555),
+    Commands.GyroDrive(speed=175, distance=559),
     # LineSquare
     Commands.LineSquare(approachSpeed=100, finetuneSpeed=50, returnTime=4500),
     Commands.GyroDrive(speed=80, distance=-15),
     # Turn to angler fish
     Commands.Pivot(speed=80, angle=-72),
-    Commands.GyroDrive(speed=175, distance=260),
+    Commands.GyroDrive(speed=175, distance=253),
     # Scare it away
     Commands.Pivot(speed=100, angle=20),
     Commands.Wait(time=200),
