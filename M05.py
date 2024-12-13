@@ -3,13 +3,13 @@ import Commands
 def m05():
   return [
     # Start
-    Commands.GyroDrive(speed=200, distance=403),
+    Commands.GyroDrive(speed=200, distance=395),
     # Turn to sub station
     Commands.Pivot(angle=-48.5),
     # Drive to sub station
     Commands.GyroDrive(speed=200, distance=575),
     # Slow Down
-    Commands.GyroDrive(speed=100, distance=75),
+    Commands.GyroDrive(speed=100, distance=25),
     # LineSquare
     Commands.LineSquare(approachSpeed=100, finetuneSpeed=50, returnTime=4500),
     # Backup
