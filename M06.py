@@ -6,7 +6,7 @@ def m06():
     #Drive to M06
     Commands.ActMotorTime(motor='right', speed=575, time=1500, wait=False),
     Commands.GyroDrive (speed=150, distance=500),
-    Commands.Pivot (angle=89, speed=100),
+    Commands.Pivot (angle=88, speed=75),
     Commands.GyroDrive (speed=150, distance=145),
     #Grab Treasure chest
     Commands.ActMotorTime (motor='right', speed=-150, time=1600),
