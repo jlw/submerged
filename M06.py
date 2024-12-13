@@ -23,5 +23,6 @@ def m06():
     Commands.ActMotorTime (motor='right', speed=-600, time=1300),
     #Return to home
     Commands.Pivot (angle=120, speed=150),
+    Commands.ActMotorTime (motor='right', speed=-600, time=1000, wait=False),
     Commands.GyroDrive (speed=250, distance=475),
     ]
