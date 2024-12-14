@@ -31,19 +31,19 @@ def m05():
     # Lower hook
     Commands.ActMotorTime(motor='right', speed=600, time=1100, wait=False),
     # Drive to the coral
-    Commands.GyroDrive(speed=200, distance=300),
+    Commands.GyroDrive(speed=200, distance=320),
     # Agressavly hit coral untill it revives it somehow
     Commands.ActMotorTime(motor='right', speed=600, time=1250),
     # Up
     Commands.ActMotorTime(motor='right', speed=-500, time=1850, wait=False),
     # Backup
-    Commands.GyroDrive(speed=200, distance=-90),
+    Commands.DriveMM(speed=200, distance=-90),
     # One wheel turn
     Commands.DriveMotor(motor="right", angle=168, speed=185),
     # Scoop up all nearby wildlife
     Commands.GyroDrive(speed=200, distance=300),
     # Turn to home
-    Commands.Pivot(angle=-42),
+    Commands.Pivot(angle=-40),
     # Return to home
     Commands.DriveMM(speed=222, distance=800),
   ]
