@@ -4,7 +4,7 @@ def m08():
   return [
     Commands.ActMotorTime(motor='right', speed=500, time=1800, wait=False),
     Commands.GyroDrive(speed=200, distance=610),
-    Commands.GyroDrive(speed=150, distance=-5),
+    Commands.DriveMM(speed=150, distance=-5),
     Commands.ActMotorTime(motor='right', speed=-600, time=1000),
     Commands.Pivot(angle=4),
     Commands.GyroDrive(speed=150, distance=90),

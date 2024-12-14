@@ -18,7 +18,6 @@ from M15 import m15
 import threading
 import _thread
 import math
-#import sys #remove if broken
 
 class Master_Main():
   def __init__(self):

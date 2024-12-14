@@ -13,7 +13,7 @@ def m05():
     # LineSquare
     Commands.LineSquare(approachSpeed=100, finetuneSpeed=50, returnTime=4500),
     # Backup
-    Commands.GyroDrive(speed=80, distance=-15),
+    Commands.DriveMM(speed=80, distance=-15),
     # Turn to angler fish
     Commands.Pivot(speed=80, angle=-71),
     # drive to angler fish
@@ -25,7 +25,7 @@ def m05():
     # Double check
     Commands.GyroDrive(speed=150, distance=10),
     # Backup
-    Commands.GyroDrive(speed=150, distance=-10),
+    Commands.DriveMM(speed=150, distance=-10),
     # Turn to coral
     Commands.Pivot(speed=100, angle=35),
     # Lower hook
