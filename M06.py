@@ -10,8 +10,8 @@ def m06():
     Commands.GyroDrive (speed=150, distance=145),
     #Grab Treasure chest
     Commands.ActMotorTime (motor='right', speed=-150, time=1600),
-    Commands.DriveMM(speed=150, distance=-8),
-    Commands.GyroDrive (speed=100, distance=10),
+    Commands.DriveMM(speed=150, distance=-12),
+    #Commands.GyroDrive (speed=100, distance=5),
     Commands.ActMotorTime (motor='right', speed=250, time=1555),
     Commands.DriveMM(speed=150, distance=-100),
     #Raise the mast
