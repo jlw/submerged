@@ -80,3 +80,11 @@ class Wait:
 
   def run(self, robot):
     robot.wait(self.time)
+
+#class ShiftGear:
+#  def _init_(self, speed=150, gear=1):
+#    self.speed = speed
+#    self.gear = gear
+#
+#  def run(self, robot):
+#    #Now just robot.py stuff

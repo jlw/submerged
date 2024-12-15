@@ -19,10 +19,10 @@ class Generic_Robot:
     self.sen2 = LightSensorRight
     self.gyro = GyroSensor
     self.stopWatch = StopWatch()
-    self.left_color_percent = 0
-    self.right_color_percent = 0
-    self.left_color_black = 0
-    self.right_color_black = 0
+    self.left_color_percent = 5
+    self.right_color_percent = 5
+    self.left_color_black = 60
+    self.right_color_black = 60 #guessing which is which, but valuse are from robot
     self.wheel_diameter = WheelDiameter
     self.wheel_base = WheelBase
 
