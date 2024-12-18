@@ -10,14 +10,16 @@ from pid import PIDController
 import math
 
 class Generic_Robot:
-  def __init__(self, EV3Brick, DriveBase, LeftMotor, RightMotor, LightSensorLeft, LightSensorRight, GyroSensor, WheelDiameter, WheelBase):
+  def __init__(self, EV3Brick, DriveBase, LeftMotor, RightMotor, WheelDiameter, WheelBase, LeftAdj=1.0, RightAdj=1.0):
     self.ev3 = EV3Brick
     self.robot = DriveBase
     self.lm = LeftMotor
     self.rm = RightMotor
-    self.sen1 = LightSensorLeft
-    self.sen2 = LightSensorRight
-    self.gyro = GyroSensor
+    self.left_adjust = LeftAdj
+    self.right_adjust = RightAdj
+    # self.sen1 = LightSensorLeft
+    # self.sen2 = LightSensorRight
+    # self.gyro = GyroSensor
     self.stopWatch = StopWatch()
     self.left_color_percent = 5
     self.right_color_percent = 5
@@ -49,8 +51,8 @@ class Generic_Robot:
   
   ### DRIVE TANK ###
   def drive_tank(self, motor_degrees, left_speed, right_speed):
-    self.lm.run_angle(left_speed, motor_degrees, then=Stop.BRAKE, wait=False)
-    self.rm.run_angle(right_speed, motor_degrees, then=Stop.BRAKE)
+    self.lm.run_angle(left_speed * self.left_adjust, motor_degrees, then=Stop.BRAKE, wait=False)
+    self.rm.run_angle(right_speed * self.right_adjust, motor_degrees, then=Stop.BRAKE)
   
   ### PIVOT ANGLE ###
   def pivot(self, target_angle, speed):
@@ -205,7 +207,7 @@ class Generic_Robot:
 
 
 class Robot_Plus(Generic_Robot):
-  def __init__(self, name = "Bilbo"):
+  def __init__(self, name = "Bilbo", LeftAdj=1.0, RightAdj=1.0):
 
     ############################################
     ### THIS MUST BE CONFIGURED TO THE ROBOT ###             
@@ -217,15 +219,25 @@ class Robot_Plus(Generic_Robot):
     self.ev3 = EV3Brick()
     self.left_motor = Motor(Port.B, Direction.CLOCKWISE, gears=None)
     self.right_motor = Motor(Port.C, Direction.CLOCKWISE, gears=None)
-    self.act_right = Motor(Port.D, Direction.CLOCKWISE, gears=None)
-    self.act_left = Motor(Port.A, Direction.CLOCKWISE, gears=None)
+    # self.act_right = Motor(Port.D, Direction.CLOCKWISE, gears=None)
+    # self.act_left = Motor(Port.A, Direction.CLOCKWISE, gears=None)
     self.drive_base = DriveBase(self.left_motor, self.right_motor, self.wheel_diameter, self.wheel_base)
-    #self.infared = InfraredSensor(Port.S1)
-    self.left_color = ColorSensor(Port.S3)
-    self.right_color = ColorSensor(Port.S4)
-    self.gyro_sensor = GyroSensor(Port.S2)
+    # self.infared = InfraredSensor(Port.S1)
+    # self.left_color = ColorSensor(Port.S3)
+    # self.right_color = ColorSensor(Port.S4)
+    # self.gyro_sensor = GyroSensor(Port.S2)
 
-    Generic_Robot.__init__(self, self.ev3, self.drive_base, self.left_motor, self.right_motor, self.left_color, self.right_color, self.gyro_sensor, self.wheel_diameter, self.wheel_base)
+    Generic_Robot.__init__(
+      self,
+      self.ev3,
+      self.drive_base,
+      self.left_motor,
+      self.right_motor,
+      self.wheel_diameter,
+      self.wheel_base,
+      LeftAdj,
+      RightAdj
+    )
   
   def query(self):
     print(self.name)
